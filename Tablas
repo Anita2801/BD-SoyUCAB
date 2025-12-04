@@ -1,0 +1,53 @@
+--Create Table 
+
+--Lugar 
+Create table Lugar 
+(ISO_Lugar varchar(10) PRIMARY KEY,
+Nombre_L varchar (20) NOT NULL,
+Tipo_L varchar (15) NOT NULL,
+ISO_Superior varchar(10), 
+CONSTRAINT FK_ISO_Superior FOREIGN KEY (ISO_Superior) REFERENCES Lugar (ISO_Lugar),
+CONSTRAINT C_Tipo_Lugar CHECK (Tipo_L in ('País', 'Estado'))); 
+
+--Cuenta 
+Create table Cuenta 
+(Usuario varchar (15) PRIMARY KEY); 
+
+--Idioma 
+Create table Idioma 
+(ISO_Idioma varchar (3) Primary KEY,
+Idioma varchar (12) NOT NULL);
+
+--Persona 
+Create table Persona 
+(CI varchar (15) PRIMARY KEY,
+Persona_Usuario varchar (15) NOT NULL UNIQUE,
+Primer_Nombre varchar (15) NOT NULL,
+Segundo_Nombre varchar (15),
+Primer_Apellido varchar (15) NOT NULL, 
+Segundo_Apellido varchar (15) NOT NULL, 
+Sexo varchar (10) NOT NULL,
+CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Cuenta (Usuario),
+CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino'))); 
+
+--Organización 
+Create table Organizacion_Asociada 
+(RIF varchar (15) PRIMARY KEY,
+OA_Usuario varchar (15) NOT NULL UNIQUE,
+Nombre_O varchar (30) NOT NULL, 
+CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Cuenta (Usuario));
+
+--Entidad Institucional
+Create table Entidad_Institucional
+(Cod_Inst varchar (10) PRIMARY KEY,
+Nombre_Ent_Inst varchar (50) NOT NULL,
+Cod_Inst_Sup varchar (10),
+CONSTRAINT FK_Cod_Inst FOREIGN KEY (Cod_Inst_Sup) REFERENCES Entidad_Institucional (Cod_Inst));
+
+--Rol
+Create table Rol 
+(Tipo_Rol varchar (20) PRIMARY KEY);
+
+--Habilidad 
+Create table Habilidad 
+(Habilidad varchar (20) PRIMARY KEY); 
