@@ -9,9 +9,9 @@ ISO_Superior varchar(10),
 CONSTRAINT FK_ISO_Superior FOREIGN KEY (ISO_Superior) REFERENCES Lugar (ISO_Lugar),
 CONSTRAINT C_Tipo_Lugar CHECK (Tipo_L in ('País', 'Estado'))); 
 
---Cuenta 
-Create table Cuenta 
-(Usuario varchar (15) PRIMARY KEY); 
+--Usuario
+Create table Usuario 
+(Cuenta varchar (15) PRIMARY KEY); 
 
 --Idioma 
 Create table Idioma 
@@ -27,7 +27,7 @@ Segundo_Nombre varchar (15),
 Primer_Apellido varchar (15) NOT NULL, 
 Segundo_Apellido varchar (15) NOT NULL, 
 Sexo varchar (10) NOT NULL,
-CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Cuenta (Usuario),
+CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Usuario (Cuenta),
 CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino'))); 
 
 --Organización 
@@ -35,7 +35,7 @@ Create table Organizacion_Asociada
 (RIF varchar (15) PRIMARY KEY,
 OA_Usuario varchar (15) NOT NULL UNIQUE,
 Nombre_O varchar (30) NOT NULL, 
-CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Cuenta (Usuario));
+CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta));
 
 --Entidad Institucional
 Create table Entidad_Institucional
@@ -51,3 +51,5 @@ Create table Rol
 --Habilidad 
 Create table Habilidad 
 (Habilidad varchar (20) PRIMARY KEY); 
+
+
