@@ -52,4 +52,95 @@ Create table Rol
 Create table Habilidad 
 (Habilidad varchar (20) PRIMARY KEY); 
 
+--Contenido 
+Create table Contenido
+(Usuario_Creador varchar (15) NOT NULL,
+FechaHora_Creacion TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+Nro_Me_Gusta NUMBER (15) DEFAULT 0,
+Nro_No_Me_Gusta NUMBER (15) DEFAULT 0,
+PRIMARY KEY (Usuario_Creador, FechaHora_Creacion)
+CONSTRAINT FK_Usuario_Creador FOREIGN KEY (Usuario_Creador) REFERENCES Usuario (Cuenta));
+
+--Reacciona 
+Create table Reacciona 
+(Usuario_Reacciona varchar (15) NOT NULL,
+Usuario_Contenido varchar (15) NOT NULL,
+FechaHora_Contenido TIMESTAMP (6) NOT NULL,
+Reaccion varchar (10) NOT NULL,
+PRIMARY KEY (Usuario_Reacciona, Usuario_Contenido, FechaHora_Contenido),
+CONSTRAINT FK_U_Reacciona FOREIGN KEY (Usuario_Reacciona) REFERENCES Usuario (Cuenta),
+CONSTRAINT FK_U_Contenido FOREIGN KEY (Usuario_Contenido, FechaHora_Contenido) REFERENCES Contenido (Usuario_Creador, FechaHora_Creacion),
+CONSTRAINT Tipo_Reaccion CHECK (Reaccion in ('Me Gusta', 'No Me Gusta')));
+
+--Evento
+Create table Evento 
+(Nombre_Evento varchar (30) NOT NULL,
+Fecha_Evento DATETIME NOT NULL,
+Usuario_Evento varchar (15) NOT NULL,
+Desc_Evento varchar (200),
+PRIMARY KEY (Nombre_Evento, Fecha_Evento, Usuario_Evento),
+CONSTRAINT FK_U_Evento FOREIGN KEY (Usuario_Evento) REFERENCES Usuario (Cuenta));
+
+--CHAT
+Create Table Chat 
+(Nombre_Chat VARCHAR (30) NOT NULL,
+Fecha_Creacion_Chat TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (Nombre_Chat, Fecha_Creacion_Chat));
+
+--Chat_Miembro
+Create table Chat_Miembro
+(Chat_Participa varchar (30) NOT NULL,
+Fecha_Chat TIMESTAMP(6) NOT NULL,
+Usuario_Chat varchar (15) NOT NULL,
+Rol_Chat varchar (10) NOT NULL, 
+PRIMARY KEY (Chat_Participa, Fecha_Chat, Usuario_Chat),
+CONSTRAINT FK_Chat_Participa FOREIGN KEY (Chat_Participa, Fecha_Chat) REFERENCES Chat (Nombre_Chat, Fecha_Creacion_Chat),
+CONSTRAINT FK_U_CHAT FOREIGN KEY (Usuario_Chat) REFERENCES Usuario (Cuenta),
+CONSTRAINT Tipo_Rol_Chat check (Rol_Chat in ('Miembro', 'Administrador', 'Creador')));
+
+--Habla
+CREATE TABLE Habla 
+(CI_Persona VARCHAR(15) NOT NULL,
+ISO_Idioma VARCHAR(3) NOT NULL,
+Nivel_Fluidez VARCHAR(20),
+PRIMARY KEY (CI_Persona, ISO_Idioma),
+CONSTRAINT FK_Habla_Persona FOREIGN KEY (CI_Persona) REFERENCES Persona (CI),
+CONSTRAINT FK_Habla_Idioma FOREIGN KEY (ISO_Idioma) REFERENCES Idioma (ISO_Idioma),
+CONSTRAINT C_Nivel_Fluidez CHECK (Nivel_Fluidez IN ('Básico', 'Intermedio', 'Avanzado', 'Nativo')));
+
+--Se_Relaciona 
+Create table Se_Relaciona
+(Usuario_Receptor VARCHAR(15) NOT NULL,
+Usuario_Solicitante VARCHAR(15) NOT NULL, 
+Tipo_Relacion VARCHAR(15) NOT NULL,
+Estado_Relacion VARCHAR(15) NOT NULL,
+PRIMARY KEY (Usuario_Receptor, Usuario_Solicitante),
+CONSTRAINT FK_U_Receptor FOREIGN KEY (Usuario_Receptor) REFERENCES Usuario (Cuenta),
+CONSTRAINT FK_U_Solicitante FOREIGN KEY (Usuario_Solicitante) REFERENCES Usuario (Cuenta),
+CONSTRAINT C_Tipo_Relacion CHECK (Tipo_Relacion in ('Seguimiento', 'Amistad')));
+
+--Grupo
+Create table Grupo 
+(Nombre_Grupo VARCHAR (30) PRIMARY KEY,
+Desc_Grupo varchar (300),
+Tipo_Grupo varchar (12));
+
+--Grupo_Participa 
+CREATE TABLE Grupo_Participa 
+(Nombre_Grupo VARCHAR(30) NOT NULL,
+Usuario_Miembro VARCHAR(15) NOT NULL,    
+Rol_Miembro VARCHAR(15) NOT NULL,
+PRIMARY KEY (Nombre_Grupo, Usuario_Miembro),
+CONSTRAINT FK_Grupo_Relacion FOREIGN KEY (Nombre_Grupo) REFERENCES Grupo (Nombre_Grupo),
+CONSTRAINT FK_Miembro_Relacion FOREIGN KEY (Usuario_Miembro) REFERENCES Usuario (Cuenta),
+CONSTRAINT CK_Rol_Miembro CHECK (Rol_Miembro IN ('Miembro', 'Moderador', 'Fundador')));
+
+--Publicación 
+Create Table Publicacion 
+(Titulo_Pub varchar (50) PRIMARY KEY,
+Autor varchar (15) NOT NULL,
+Sinopsis_Pub varchar (400) NOT NULL, 
+Fecha_Pub DATETIME NOT NULL, 
+PRIMARY KEY (Titulo_Pub, Autor), 
+CONSTRAINT FK_Autor FOREIGN KEY (Autor) REFERENCES Usuario (Cuenta));
 
