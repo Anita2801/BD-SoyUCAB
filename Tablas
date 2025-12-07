@@ -51,7 +51,7 @@ CONSTRAINT FK_Cod_Inst FOREIGN KEY (Cod_Inst_Sup) REFERENCES Entidad_Institucion
 --Rol
 Create table Rol 
 (Tipo_Rol varchar (20) PRIMARY KEY, 
-CONSTRAINT C_Tipo_Rol check (Tipo_Rol in ('Estudiante', 'Profesor', 'Empleado')));
+CONSTRAINT C_Tipo_Rol check (Tipo_Rol in ('Estudiante', 'Profesor', 'Empleado', 'Egresado')));
 
 --Habilidad 
 Create table Habilidad 
