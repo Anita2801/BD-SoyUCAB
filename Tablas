@@ -62,10 +62,11 @@ Create table Habilidad
 Create table Contenido
 (Usuario_Creador varchar (15) NOT NULL,
 FechaHora_Creacion TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-Nro_Me_Gusta NUMBER (15) DEFAULT 0,
-Nro_No_Me_Gusta NUMBER (15) DEFAULT 0,
-PRIMARY KEY (Usuario_Creador, FechaHora_Creacion)
+Nro_Me_Gusta INTEGER DEFAULT 0,
+Nro_No_Me_Gusta INTEGER DEFAULT 0,
+PRIMARY KEY (Usuario_Creador, FechaHora_Creacion),
 CONSTRAINT FK_Usuario_Creador FOREIGN KEY (Usuario_Creador) REFERENCES Usuario (Cuenta));
+
 
 --Reacciona 
 Create table Reacciona 
