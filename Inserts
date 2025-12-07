@@ -1,0 +1,218 @@
+--Inserts 
+
+--Usuario 
+
+INSERT INTO Usuario (Cuenta) VALUES ('qdmancha.22');
+INSERT INTO Usuario (Cuenta) VALUES ('smpanza.22');
+INSERT INTO Usuario (Cuenta) VALUES ('chbenengeli.19');
+INSERT INTO Usuario (Cuenta) VALUES ('dtoboso.22');
+INSERT INTO Usuario (Cuenta) VALUES ('mcervantes.02');
+INSERT INTO Usuario (Cuenta) VALUES ('jgmaestro.95');
+INSERT INTO Usuario (Cuenta) VALUES ('cjmarlow.20');
+INSERT INTO Usuario (Cuenta) VALUES ('Lfguichard.15');
+INSERT INTO Usuario (Cuenta) VALUES ('aagromeko.17');
+INSERT INTO Usuario (Cuenta) VALUES ('yazhivago.14');
+INSERT INTO Usuario (Cuenta) VALUES ('telawrence.04');
+INSERT INTO Usuario (Cuenta) VALUES ('mercantil.20');
+INSERT INTO Usuario (Cuenta) VALUES ('empolar.20');
+INSERT INTO Usuario (Cuenta) VALUES ('ccfemsa.20');
+INSERT INTO Usuario (Cuenta) VALUES ('banesco.20');
+INSERT INTO Usuario (Cuenta) VALUES ('mercer.20');
+INSERT INTO Usuario (Cuenta) VALUES ('embfan.20');
+INSERT INTO Usuario (Cuenta) VALUES ('embpol.20');
+INSERT INTO Usuario (Cuenta) VALUES ('embcor.20');
+INSERT INTO Usuario (Cuenta) VALUES ('duncan.20');
+INSERT INTO Usuario (Cuenta) VALUES ('pepsico.20');
+
+
+--Lugar
+
+INSERT INTO Lugar (ISO_Lugar, Nombre_L, Tipo_L, ISO_Superior) VALUES
+('VE', 'Venezuela', 'País', NULL),
+('CD', 'R.D. del Congo', 'País', NULL),
+('SA', 'Arabia Saudita', 'País', NULL);
+('SA-02', 'La Meca', 'Estado', 'SA'),
+('VE-A', 'Distrito Capital', 'Estado', 'VE'),
+('VE-F', 'Bolívar', 'Estado', 'VE'),
+('CD-KN', 'Kinshasa', 'Estado', 'CD');
+
+
+--Persona 
+
+INSERT INTO Persona (CI, Persona_Usuario, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Sexo, Ubicacion_Persona) VALUES
+('30000001', 'qdmancha.22', 'Quijote', NULL, 'de la Mancha', 'Cervantes', 'Masculino', 'VE-A'),
+('30000002', 'smpanza.22', 'Sancho', 'Miguel', 'Panza', 'Saavedra', 'Masculino', 'VE-A'),
+('30000003', 'chbenengeli.19', 'Cede', 'Hamete', 'Benengeli', 'Bittar', 'Masculino', 'VE-F'),
+('30000004', 'dtoboso.22', 'Dulcinea', NULL, 'Del Toboso', 'Henares', 'Femenino', 'VE-A'),
+('30000005', 'mcervantes.02', 'Miguel', NULL, 'De Cervantes', 'Saavedra', 'Masculino', 'VE-A'),
+('30000006', 'jgmaestro.95', 'Jesús', NULL, 'Gonzalez', 'Maestro', 'Masculino', 'VE-A'),
+('30000007', 'cjmarlow.20', 'Charlie', 'Joseph', 'Marlow', 'Conrad', 'Masculino', 'CD-KN'),
+('30000008', 'Lfguichard.15', 'Larissa', 'Fiodorovna', 'Guichard', 'Antipova', 'Femenino', 'VE-A'),
+('30000009', 'aagromeko.17', 'Antonina', 'Alexandrova', 'Gromeko', 'Zhivago', 'Femenino', 'VE-A'),
+('30000010', 'yazhivago.14', 'Yuri', 'Andreievitch', 'Jivago', 'Pasternak', 'Masculino', 'VE-A'),
+('30000000', 'telawrence.04', 'Thomas', 'Eduardo', 'Lawrence', 'Junner', 'Masculino', 'SA-02');
+
+
+--Rol 
+Insert into Rol (Tipo_Rol) Values 
+('Estudiante'), ('Profesor'), ('Empleado'), ('Egresado');
+
+--Desempeña 
+INSERT INTO Desempeña (CI_Rol, Des_Rol) VALUES
+('30000001', 'Estudiante'),
+('30000002', 'Estudiante'),
+('30000003', 'Estudiante'),
+('30000004', 'Estudiante'),
+('30000005', 'Profesor'),
+('30000006', 'Profesor'),
+('30000008', 'Empleado')
+('30000008', 'Profesor'),
+('30000009', 'Empleado'),
+('30000010', 'Empleado'),
+('30000007', 'Egresado'),
+('30000000', 'Egresado'),
+('30000000', 'Profesor');
+
+
+--Idioma 
+INSERT INTO Idioma (ISO_Idioma, Idioma) VALUES
+('es', 'Español'),
+('en', 'Inglés'),
+('de', 'Alemán'),
+('fr', 'Francés'),
+('ar', 'Árabe'),
+('ru', 'Ruso');
+
+--Habla 
+INSERT INTO Habla (CI_Persona, ISO_Idioma, Nivel_Fluidez) VALUES
+('30000001', 'es', 'Nativo'),
+('30000002', 'es', 'Nativo'),
+('30000003', 'es', 'Nativo'),
+('30000003', 'ar', 'Avanzado'),
+('30000004', 'es', 'Nativo'),
+('30000004', 'fr', 'Intermedio'),
+('30000005', 'es', 'Nativo'),
+('30000005', 'fr', 'Avanzado'),
+('30000005', 'en', 'Intermedio'),
+('30000006', 'es', 'Nativo'),
+('30000007', 'es', 'Nativo'),
+('30000007', 'en', 'Nativo'),
+('30000007', 'fr', 'Básico'),
+('30000008', 'es', 'Nativo'),
+('30000008', 'ru', 'Avanzado'),
+('30000008', 'fr', 'Básico'),
+('30000009', 'es', 'Nativo'),
+('30000009', 'ru', 'Avanzado'),
+('30000009', 'fr', 'Avanzado'),
+('30000010', 'es', 'Nativo'),
+('30000010', 'ru', 'Avanzado'),
+('30000000', 'es', 'Nativo'),
+('30000000', 'en', 'Avanzado'),
+('30000000', 'ar', 'Avanzado');
+
+--Habilidad 
+INSERT INTO Habilidad (Habilidad) VALUES
+('Trabajo en Equipo'),
+('Pintura'), -- Corregido de Pintar
+('Idiomas'),
+('Dibujo'), -- Corregido de Dibujas
+('Canto'), -- Corregido de Cantar
+('Música'),
+('Navegación'), -- Corregido de Navegar (asumo navegación web o marítima)
+('Excel'),
+('Microsoft Office'),
+('Fotografía'),
+('Edición de Video'),
+('Liderazgo'), -- Corregido de Liderzago
+('Programación'),
+('Trabajo Bajo Presión'),
+('Matemáticas');
+
+--Capacidad Hab
+INSERT INTO Capacidad_Hab (CI, Habilidad) VALUES
+('30000001', 'Trabajo en Equipo'),
+('30000002', 'Trabajo Bajo Presión'),
+('30000003', 'Programación'),
+('30000004', 'Pintura'),
+('30000005', 'Idiomas'),
+('30000005', 'Liderazgo'),
+('30000006', 'Programación'),
+('30000006', 'Matemáticas'),
+('30000007', 'Navegación'),
+('30000007', 'Trabajo Bajo Presión'),
+('30000008', 'Música'),
+('30000009', 'Fotografía'),
+('30000009', 'Edición de Video'),
+('30000010', 'Liderazgo'),
+('30000010', 'Música'),
+('30000000', 'Liderazgo'),
+('30000000', 'Matemáticas');
+
+
+--Organizacion asociada
+INSERT INTO Organizacion_Asociada (RIF, OA_Usuario, Nombre_O, Ubicacion_OA) VALUES
+('310000001', 'empolar.20', 'Empresas Polar', 'VE-A'),
+('310000002', 'ccfemsa.20', 'Coca Cola', 'VE-A'),
+('310000003', 'banesco.20', 'Banesco', 'VE-A'),
+('310000004', 'mercantil.20', 'Mercantil', 'VE-A'),
+('310000005', 'mercer.20', 'Mercer', 'VE-A'),
+('310000006', 'embfan.20', 'Embajada de Francia', 'VE-A'),
+('310000007', 'embpol.20', 'Embajada de Polonia', 'VE-A'),
+('310000008', 'embcor.20', 'Embajada de Corea', 'VE-A'),
+('310000009', 'duncan.20', 'Duncan', 'VE-A'),
+('310000010', 'pepsico.20', 'Pepsico', 'VE-A');
+
+--entidad institucional
+INSERT INTO Entidad_Institucional (Cod_Inst, Nombre_Ent_Inst, Cod_Inst_Sup) VALUES
+('FACES', 'Facultad de Ciencias Economicas y Sociales', NULL),
+('DERE', 'Facultad de Derecho', NULL),
+('FING', 'Facultad de Ingeniería', NULL),
+('FHYE', 'Facultad de Humanidad y Educación', NULL),
+('SECR', 'Secretaría', NULL),
+('VIAD', 'Vicerrectorado Administrativo', NULL),
+('SSST', 'Servicio de Seguridad y Salud en el Trabajo', NULL);
+('CISO', 'Escuela de Ciencias Sociales', 'FACES'),
+('ECON', 'Economía', 'FACES'),
+('ADCON', 'Administracion y Contaduría', 'FACES'),
+('INFO', 'Ingeniería Informatica', 'FING'),
+('TELE', 'Ingeniería Telecomunicaciones', 'FING'),
+('ARQU', 'Arquitectura', 'FING'),
+('CIVI', 'Ingeniería Civil', 'FING'),
+('MECA', 'Ingeniería Mecatrónica', 'FING'),
+('INDU', 'Ingeniería Industrial', 'FING'),
+('COMU', 'Comunicación Social', 'FHYE'),
+('LETR', 'Letras', 'FHYE'),
+('PSIC', 'Psicología', 'FHYE'),
+('EDUC', 'Educación', 'FHYE'),
+('DIGE', 'Direccion de Gestón Estudinatil', 'SECR'),
+('DIAF', 'Dirección de Administración y Finanzas', 'VIAD'),
+('SEME', 'Servicios Medicos UCAB', 'SSST');
+
+
+--Nexo 
+INSERT INTO Nexo (CI_Nexo, Cod_Inst_Nexo) VALUES
+('30000001', 'COMU'),
+('30000002', 'INFO'),
+('30000003', 'DERE'),
+('30000004', 'PSIC'),
+('30000005', 'LETR'),
+('30000006', 'EDUC'),
+('30000006', 'LETR'),
+('30000007', 'MECA'),
+('30000008', 'ADCON'),
+('30000008', 'DIAF'),
+('30000009', 'DIGE'),
+('30000010', 'SEME'),
+('30000000', 'CISO'),
+('30000000', 'LETR');
+
+
+--Publicacion 
+INSERT INTO Publicacion (Titulo_Pub, Autor, Sinopsis_Pub, Fecha_Pub) VALUES
+('El ingenioso hidalgo Don Quijote de la Mancha', 'mcervantes.02', 'Primera parte de la novela cumbre de la literatura española, que narra las aventuras de un hidalgo enloquecido que se cree caballero andante.', '1605-01-16'),
+('Novelas Ejemplares', 'mcervantes.02', 'Colección de doce novelas cortas que abordan temas morales y sociales con maestría.', '1613-09-02'),
+('Los trabajos de Persiles y Sigismunda', 'mcervantes.02', 'Novela póstuma de género bizantino, que relata la peregrinación de dos príncipes nórdicos.', '1617-04-16'),
+('Crítica de la Razón Literaria', 'jgmaestro.95', 'Obra fundamental que sienta las bases teóricas de la Literatura Materialista. Un análisis filosófico de la ficción.', '2011-03-25'),
+('La Literatura, un arte del lenguaje', 'jgmaestro.95', 'Ensayo que aborda la naturaleza lingüística y material de la obra literaria y su relación con el sistema literario.', '2007-06-15'),
+('Siete Pilares de Sabiduría', 'telawrence.04', 'Memorias de T. E. Lawrence sobre su participación en la Gran Revuelta Árabe contra el Imperio Otomano durante la Primera Guerra Mundial.', '1926-11-20');
+
