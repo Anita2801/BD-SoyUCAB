@@ -29,7 +29,7 @@ Segundo_Apellido varchar (15) NOT NULL,
 Sexo varchar (10) NOT NULL,
 Ubicacion_Persona varchar (10) NOT NULL, 
 CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Usuario (Cuenta),
-CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino'))
+CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino')),
 CONSTRAINT FK_ubi_Persona FOREIGN KEY (Ubicacion_Persona) REFERENCES Lugar (ISO_Lugar)); 
 
 --Organización 
@@ -38,7 +38,7 @@ Create table Organizacion_Asociada
 OA_Usuario varchar (15) NOT NULL UNIQUE,
 Nombre_O varchar (30) NOT NULL, 
 Ubicacion_OA varchar (10) NOT NULL, 
-CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta)
+CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta),
 CONSTRAINT FK_Ubi_OA FOREIGN KEY (Ubicacion_OA) REFERENCES Lugar (ISO_Lugar));
 
 --Entidad Institucional
