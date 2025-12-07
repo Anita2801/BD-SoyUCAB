@@ -29,7 +29,7 @@ Segundo_Apellido varchar (15) NOT NULL,
 Sexo varchar (10) NOT NULL,
 Ubicacion_Persona varchar (10) NOT NULL, 
 CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Usuario (Cuenta),
-CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino')),
+CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino'))
 CONSTRAINT FK_ubi_Persona FOREIGN KEY (Ubicacion_Persona) REFERENCES Lugar (ISO_Lugar)); 
 
 --Organización 
@@ -38,7 +38,7 @@ Create table Organizacion_Asociada
 OA_Usuario varchar (15) NOT NULL UNIQUE,
 Nombre_O varchar (30) NOT NULL, 
 Ubicacion_OA varchar (10) NOT NULL, 
-CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta),
+CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta)
 CONSTRAINT FK_Ubi_OA FOREIGN KEY (Ubicacion_OA) REFERENCES Lugar (ISO_Lugar));
 
 --Entidad Institucional
@@ -55,7 +55,7 @@ CONSTRAINT C_Tipo_Rol check (Tipo_Rol in ('Estudiante', 'Profesor', 'Empleado', 
 
 --Habilidad 
 Create table Habilidad 
-(Habilidad varchar (20) PRIMARY KEY); 
+(Habilidad varchar (30) PRIMARY KEY); 
 
 
 --Contenido 
@@ -66,7 +66,6 @@ Nro_Me_Gusta INTEGER DEFAULT 0,
 Nro_No_Me_Gusta INTEGER DEFAULT 0,
 PRIMARY KEY (Usuario_Creador, FechaHora_Creacion),
 CONSTRAINT FK_Usuario_Creador FOREIGN KEY (Usuario_Creador) REFERENCES Usuario (Cuenta));
-
 
 --Reacciona 
 Create table Reacciona 
@@ -82,7 +81,7 @@ CONSTRAINT Tipo_Reaccion CHECK (Reaccion in ('Me Gusta', 'No Me Gusta')));
 --Evento
 Create table Evento 
 (Nombre_Evento varchar (30) NOT NULL,
-Fecha_Evento DATETIME NOT NULL,
+Fecha_Evento DATE NOT NULL,
 Usuario_Evento varchar (15) NOT NULL,
 Desc_Evento varchar (200),
 PRIMARY KEY (Nombre_Evento, Fecha_Evento, Usuario_Evento),
@@ -144,10 +143,10 @@ CONSTRAINT CK_Rol_Miembro CHECK (Rol_Miembro IN ('Miembro', 'Moderador', 'Fundad
 
 --Publicación 
 Create Table Publicacion 
-(Titulo_Pub varchar (50) PRIMARY KEY,
+(Titulo_Pub varchar (50) NOT NULL,
 Autor varchar (15) NOT NULL,
 Sinopsis_Pub varchar (400) NOT NULL, 
-Fecha_Pub DATETIME NOT NULL, 
+Fecha_Pub DATE NOT NULL, 
 PRIMARY KEY (Titulo_Pub, Autor), 
 CONSTRAINT FK_Autor FOREIGN KEY (Autor) REFERENCES Usuario (Cuenta));
 
@@ -180,7 +179,7 @@ CONSTRAINT FK_Des_Rol FOREIGN KEY (Des_Rol) REFERENCES Rol (Tipo_Rol));
 --Nexo 
 Create table Nexo 
 (Cod_Inst_Nexo varchar (10) NOT NULL,
-CI_Nexo varchar (15) NOT NULL, , 
+CI_Nexo varchar (15) NOT NULL,
 Primary Key (Cod_Inst_Nexo, CI_Nexo),
 CONSTRAINT FK_COD_INST_NEXO FOREIGN KEY (Cod_Inst_Nexo) REFERENCES Entidad_Institucional (Cod_Inst),
 CONSTRAINT FK_CI_NEXO FOREIGN KEY (CI_Nexo) REFERENCES Persona (CI));
