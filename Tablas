@@ -29,7 +29,7 @@ Segundo_Apellido varchar (15) NOT NULL,
 Sexo varchar (10) NOT NULL,
 Ubicacion_Persona varchar (10) NOT NULL, 
 CONSTRAINT FK_Persona_Cuenta FOREIGN KEY (Persona_Usuario) REFERENCES Usuario (Cuenta),
-CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino'))
+CONSTRAINT C_Sexo CHECK (sexo in ('Masculino', 'Femenino')),
 CONSTRAINT FK_ubi_Persona FOREIGN KEY (Ubicacion_Persona) REFERENCES Lugar (ISO_Lugar)); 
 
 --Organización 
@@ -38,7 +38,7 @@ Create table Organizacion_Asociada
 OA_Usuario varchar (15) NOT NULL UNIQUE,
 Nombre_O varchar (30) NOT NULL, 
 Ubicacion_OA varchar (10) NOT NULL, 
-CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta)
+CONSTRAINT FK_OA_Cuenta FOREIGN KEY (OA_Usuario) REFERENCES Usuario (Cuenta),
 CONSTRAINT FK_Ubi_OA FOREIGN KEY (Ubicacion_OA) REFERENCES Lugar (ISO_Lugar));
 
 --Entidad Institucional
@@ -195,5 +195,5 @@ Fecha_Inicio DATE NOT NULL,
 Fecha_Fin DATE,
 PRIMARY KEY (INST_T, CI_T, ROL_T),
 CONSTRAINT FK_Nexo FOREIGN KEY (Inst_T, CI_T) REFERENCES Nexo (Cod_Inst_Nexo, CI_Nexo),
-CONSTRAINT FK_Desempena FOREIGN KEY (CI_T, ROL_T) REFERENCES Desempeña (CI_Rol, Des_Rol)
+CONSTRAINT FK_Desempena FOREIGN KEY (CI_T, ROL_T) REFERENCES Desempeña (CI_Rol, Des_Rol),
 CONSTRAINT CK_Fecha_Duracion CHECK (Fecha_Fin IS NULL OR Fecha_Fin >= Fecha_Inicio));
