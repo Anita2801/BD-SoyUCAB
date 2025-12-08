@@ -31,7 +31,7 @@ INSERT INTO Usuario (Cuenta) VALUES ('bestiaSQL.25');
 INSERT INTO Lugar (ISO_Lugar, Nombre_L, Tipo_L, ISO_Superior) VALUES
 ('VE', 'Venezuela', 'País', NULL),
 ('CD', 'R.D. del Congo', 'País', NULL),
-('SA', 'Arabia Saudita', 'País', NULL);
+('SA', 'Arabia Saudita', 'País', NULL),
 ('SA-02', 'La Meca', 'Estado', 'SA'),
 ('VE-A', 'Distrito Capital', 'Estado', 'VE'),
 ('VE-F', 'Bolívar', 'Estado', 'VE'),
@@ -67,7 +67,7 @@ INSERT INTO Desempeña (CI_Rol, Des_Rol) VALUES
 ('30000004', 'Estudiante'),
 ('30000005', 'Profesor'),
 ('30000006', 'Profesor'),
-('30000008', 'Empleado')
+('30000008', 'Empleado'),
 ('30000008', 'Profesor'),
 ('30000009', 'Empleado'),
 ('30000010', 'Empleado'),
@@ -118,17 +118,17 @@ INSERT INTO Habla (CI_Persona, ISO_Idioma, Nivel_Fluidez) VALUES
 --Habilidad 
 INSERT INTO Habilidad (Habilidad) VALUES
 ('Trabajo en Equipo'),
-('Pintura'), -- Corregido de Pintar
+('Pintura'), 
 ('Idiomas'),
-('Dibujo'), -- Corregido de Dibujas
-('Canto'), -- Corregido de Cantar
+('Dibujo'), 
+('Canto'), 
 ('Música'),
-('Navegación'), -- Corregido de Navegar (asumo navegación web o marítima)
+('Navegación'), 
 ('Excel'),
 ('Microsoft Office'),
 ('Fotografía'),
 ('Edición de Video'),
-('Liderazgo'), -- Corregido de Liderzago
+('Liderazgo'), 
 ('Programación'),
 ('Trabajo Bajo Presión'),
 ('Matemáticas');
@@ -317,17 +317,19 @@ INSERT INTO Chat (Nombre_Chat) VALUES ('Consultas y Soporte TI');
 
 --chat_miembro 
 INSERT INTO Chat_Miembro (Chat_Participa, Fecha_Chat, Usuario_Chat, Rol_Chat) VALUES
-('Consultas y Soporte TI', '2025-12-07 20:49:54.794723', 'dtoboso.22', 'Creador'),
-('Consultas y Soporte TI', '2025-12-07 20:49:54.794723', 'mcervantes.02', 'Administrador'),
-('Consultas y Soporte TI', '2025-12-07 20:49:54.794723', 'jgmaestro.95', 'Miembro');
+('Consultas y Soporte TI', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Consultas y Soporte TI'), 'dtoboso.22', 'Creador'),
+('Consultas y Soporte TI', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Consultas y Soporte TI'), 'mcervantes.02', 'Administrador'),
+('Consultas y Soporte TI', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Consultas y Soporte TI'), 'jgmaestro.95', 'Miembro');
+
 INSERT INTO Chat_Miembro (Chat_Participa, Fecha_Chat, Usuario_Chat, Rol_Chat) VALUES
-('Grupo de Estudio DDL', '2025-12-07 20:49:54.794723', 'qdmancha.22', 'Creador'),
-('Grupo de Estudio DDL', '2025-12-07 20:49:54.794723', 'smpanza.22', 'Miembro'),
-('Grupo de Estudio DDL', '2025-12-07 20:49:54.794723', 'chbenengeli.19', 'Miembro');
+('Grupo de Estudio DDL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Grupo de Estudio DDL'), 'qdmancha.22', 'Creador'),
+('Grupo de Estudio DDL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Grupo de Estudio DDL'), 'smpanza.22', 'Miembro'),
+('Grupo de Estudio DDL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Grupo de Estudio DDL'), 'chbenengeli.19', 'Miembro');
+
 INSERT INTO Chat_Miembro (Chat_Participa, Fecha_Chat, Usuario_Chat, Rol_Chat) VALUES
-('Equipo de Desarrollo SQL', '2025-12-07 20:49:54.794723', 'bestiaSQL.25', 'Creador'),
-('Equipo de Desarrollo SQL', '2025-12-07 20:49:54.794723', 'cjmarlow.20', 'Administrador'),
-('Equipo de Desarrollo SQL', '2025-12-07 20:49:54.794723', 'aagromeko.17', 'Miembro');
+('Equipo de Desarrollo SQL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Equipo de Desarrollo SQL'), 'bestiaSQL.25', 'Creador'),
+('Equipo de Desarrollo SQL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Equipo de Desarrollo SQL'), 'cjmarlow.20', 'Administrador'),
+('Equipo de Desarrollo SQL', (Select Fecha_Creacion_Chat from chat where nombre_chat = 'Equipo de Desarrollo SQL'), 'aagromeko.17', 'Miembro');
 
 
 --grupo 
