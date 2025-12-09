@@ -1,0 +1,88 @@
+ALTER TABLE Se_Relaciona
+ADD COLUMN estado VARCHAR(15) NOT NULL DEFAULT 'Pendiente',
+ADD CONSTRAINT CK_Estado_Relacion CHECK (estado IN ('Pendiente', 'Aceptada', 'Rechazada'));
+
+CREATE TABLE Notificaciones (
+    id_notificacion SERIAL PRIMARY KEY,
+    id_usuario_destino VARCHAR(15) NOT NULL REFERENCES Usuario(Cuenta),
+    mensaje TEXT NOT NULL,
+    tipo_alerta VARCHAR(20) NOT NULL,
+    fecha_creacion TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE OR REPLACE FUNCTION fn_notificar_cambio_estado()
+RETURNS TRIGGER AS $$
+DECLARE
+    mensaje_notificacion TEXT;
+    tipo_alerta_final VARCHAR(20);
+BEGIN
+    IF (NEW.estado IN ('Aceptada', 'Rechazada')) AND (OLD.estado IS DISTINCT FROM NEW.estado) THEN
+        IF NEW.estado = 'Aceptada' THEN
+            mensaje_notificacion := 'Tu solicitud de relación ha sido aceptada.';
+            tipo_alerta_final := 'Aceptada';
+        ELSE
+            mensaje_notificacion := 'Tu solicitud de relación ha sido rechazada.';
+            tipo_alerta_final := 'Rechazada';
+        END IF;
+
+        INSERT INTO Notificaciones (id_usuario_destino, mensaje, tipo_alerta)
+        VALUES (NEW.Usuario_Solicitante, mensaje_notificacion, tipo_alerta_final);
+        
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_notificar_estado_relacion
+AFTER UPDATE ON Se_Relaciona 
+FOR EACH ROW
+EXECUTE FUNCTION fn_notificar_cambio_estado();
+
+CREATE TABLE Asistencia_Evento (
+    Usuario_Asistente VARCHAR(15) NOT NULL,
+    Nombre_Evento VARCHAR(30) NOT NULL,
+    Fecha_Evento DATE NOT NULL,
+    Usuario_Evento_Org VARCHAR(15) NOT NULL, 
+    Fecha_Registro TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    Asistencia_Confirmada BOOLEAN DEFAULT TRUE,
+    
+    PRIMARY KEY (Usuario_Asistente, Nombre_Evento, Fecha_Evento, Usuario_Evento_Org),
+    
+    CONSTRAINT FK_Usuario_Asistente FOREIGN KEY (Usuario_Asistente) REFERENCES Usuario (Cuenta),
+    CONSTRAINT FK_Evento_Asistido FOREIGN KEY (Nombre_Evento, Fecha_Evento, Usuario_Evento_Org) 
+    REFERENCES Evento (Nombre_Evento, Fecha_Evento, Usuario_Evento)
+);
+
+CREATE OR REPLACE PROCEDURE sp_registrar_asistencia_evento(
+    p_nombre_evento VARCHAR(30),
+    p_fecha_evento DATE,
+    p_usuario_organizador VARCHAR(15),
+    p_lista_asistentes VARCHAR(15)[]
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_asistente VARCHAR(15);
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM Evento 
+        WHERE Nombre_Evento = p_nombre_evento 
+          AND Fecha_Evento = p_fecha_evento 
+          AND Usuario_Evento = p_usuario_organizador
+    ) THEN
+        RAISE EXCEPTION 'El evento especificado no existe.';
+    END IF;
+
+    FOREACH v_asistente IN ARRAY p_lista_asistentes
+    LOOP
+        INSERT INTO Asistencia_Evento (Usuario_Asistente, Nombre_Evento, Fecha_Evento, Usuario_Evento_Org)
+        VALUES (v_asistente, p_nombre_evento, p_fecha_evento, p_usuario_organizador)
+        ON CONFLICT (Usuario_Asistente, Nombre_Evento, Fecha_Evento, Usuario_Evento_Org) DO NOTHING;
+    END LOOP;
+    
+EXCEPTION
+    WHEN others THEN
+        RAISE EXCEPTION 'Error al registrar la asistencia: %', SQLERRM;
+END;
+$$;
