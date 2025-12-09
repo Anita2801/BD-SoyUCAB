@@ -177,7 +177,7 @@ INSERT INTO Entidad_Institucional (Cod_Inst, Nombre_Ent_Inst, Cod_Inst_Sup) VALU
 ('FHYE', 'Facultad de Humanidad y Educación', NULL),
 ('SECR', 'Secretaría', NULL),
 ('VIAD', 'Vicerrectorado Administrativo', NULL),
-('SSST', 'Servicio de Seguridad y Salud en el Trabajo', NULL);
+('SSST', 'Servicio de Seguridad y Salud en el Trabajo', NULL),
 ('CISO', 'Escuela de Ciencias Sociales', 'FACES'),
 ('ECON', 'Economía', 'FACES'),
 ('ADCON', 'Administracion y Contaduría', 'FACES'),
