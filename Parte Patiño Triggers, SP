@@ -1,0 +1,169 @@
+--Alter tabla reacciona 
+ALTER TABLE Reacciona
+ALTER COLUMN Reaccion TYPE VARCHAR(15);
+
+
+--trigger
+
+CREATE OR REPLACE FUNCTION F_Actualizar_Nro_Reacciones()
+RETURNS TRIGGER AS $$
+DECLARE
+    reaccion_anterior VARCHAR(10);
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        IF NEW.Reaccion = 'Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_Me_Gusta = Nro_Me_Gusta + 1
+            WHERE Usuario_Creador = NEW.Usuario_Contenido
+              AND FechaHora_Creacion = NEW.FechaHora_Contenido;
+        ELSIF NEW.Reaccion = 'No Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_No_Me_Gusta = Nro_No_Me_Gusta + 1
+            WHERE Usuario_Creador = NEW.Usuario_Contenido
+              AND FechaHora_Creacion = NEW.FechaHora_Contenido;
+        END IF;
+
+    ELSIF TG_OP = 'UPDATE' THEN
+        IF OLD.Reaccion = NEW.Reaccion THEN
+            RETURN NEW;
+        END IF;
+
+        IF OLD.Reaccion = 'Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_Me_Gusta = Nro_Me_Gusta - 1
+            WHERE Usuario_Creador = OLD.Usuario_Contenido
+              AND FechaHora_Creacion = OLD.FechaHora_Contenido;
+        ELSIF OLD.Reaccion = 'No Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_No_Me_Gusta = Nro_No_Me_Gusta - 1
+            WHERE Usuario_Creador = OLD.Usuario_Contenido
+              AND FechaHora_Creacion = OLD.FechaHora_Contenido;
+        END IF;
+
+        IF NEW.Reaccion = 'Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_Me_Gusta = Nro_Me_Gusta + 1
+            WHERE Usuario_Creador = NEW.Usuario_Contenido
+              AND FechaHora_Creacion = NEW.FechaHora_Contenido;
+        ELSIF NEW.Reaccion = 'No Me Gusta' THEN
+            UPDATE Contenido
+            SET Nro_No_Me_Gusta = Nro_No_Me_Gusta + 1
+            WHERE Usuario_Creador = NEW.Usuario_Contenido
+              AND FechaHora_Creacion = NEW.FechaHora_Contenido;
+        END IF;
+        
+    END IF;
+    RETURN NEW; 
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER T_Nro_Reacciones 
+AFTER INSERT OR UPDATE OF Reaccion ON Reacciona
+FOR EACH ROW
+EXECUTE FUNCTION F_Actualizar_Nro_Reacciones();
+
+--funcion contar seguidores 
+
+CREATE OR REPLACE FUNCTION contar_seguimiento(
+    p_cuenta_usuario VARCHAR(15)
+)
+RETURNS TABLE (
+    total_seguidores BIGINT, 
+    total_seguidos BIGINT     
+)
+AS $$
+SELECT 
+    (
+        SELECT COUNT(*)
+        FROM Se_Relaciona
+        WHERE 
+            Usuario_Receptor = p_cuenta_usuario 
+            AND Tipo_Relacion = 'Seguimiento'
+    ),
+
+    (
+        SELECT COUNT(*)
+        FROM Se_Relaciona
+        WHERE 
+            Usuario_Solicitante = p_cuenta_usuario 
+            AND Tipo_Relacion = 'Seguimiento'
+    );
+$$ LANGUAGE sql;
+
+
+--Procedimiento Almacenado
+
+CREATE OR REPLACE PROCEDURE Gestionar_Post_SP(
+    p_usuario_editor VARCHAR(15),      
+    p_usuario_creador VARCHAR(15),      
+    p_fecha_creacion TIMESTAMP,         
+    p_operacion VARCHAR(10),            
+    p_cuerpo_nuevo VARCHAR(300) DEFAULT NULL
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_existe BOOLEAN;
+    v_creador_real VARCHAR(15);
+BEGIN
+    
+    SELECT EXISTS (
+        SELECT 1
+        FROM Contenido
+        WHERE Usuario_Creador = p_usuario_creador
+          AND FechaHora_Creacion = p_fecha_creacion
+    ), Usuario_Creador
+    INTO v_existe, v_creador_real
+    FROM Contenido
+    WHERE Usuario_Creador = p_usuario_creador
+      AND FechaHora_Creacion = p_fecha_creacion;
+
+
+    IF NOT v_existe THEN
+        RAISE EXCEPTION 'ERROR: El post especificado no existe. (Creador: %, Fecha: %)', 
+            p_usuario_creador, p_fecha_creacion;
+    END IF;
+
+    IF p_usuario_editor <> v_creador_real THEN
+        RAISE EXCEPTION 'ERROR: Solo el creador (%) puede modificar o eliminar este post.', v_creador_real;
+    END IF;
+
+
+    IF p_operacion = 'UPDATE' THEN
+        IF p_cuerpo_nuevo IS NULL OR TRIM(p_cuerpo_nuevo) = '' THEN
+             RAISE EXCEPTION 'ERROR: El nuevo cuerpo del post no puede estar vacío para la operación UPDATE.';
+        END IF;
+        
+        UPDATE Contenido
+        SET Cuerpo_Contenido = p_cuerpo_nuevo
+        WHERE Usuario_Creador = p_usuario_creador
+          AND FechaHora_Creacion = p_fecha_creacion;
+        
+        RAISE NOTICE 'EXITO: Post actualizado correctamente por %.', p_usuario_editor;
+    
+    ELSIF p_operacion = 'DELETE' THEN
+        
+        DELETE FROM Contenido
+        WHERE Usuario_Creador = p_usuario_creador
+          AND FechaHora_Creacion = p_fecha_creacion;
+        
+        RAISE NOTICE 'EXITO: Post eliminado correctamente por %.', p_usuario_editor;
+        
+    ELSE
+        RAISE EXCEPTION 'ERROR: Operación no válida. Solo puede usar "UPDATE" o "DELETE".';
+    END IF;
+
+END;
+$$;
+
+--INSERTS REACCIONA
+--reacciona
+INSERT INTO Reacciona (Usuario_Reacciona, Usuario_Contenido, FechaHora_Contenido, Reaccion) VALUES
+('Lfguichard.15', 'bestiaSQL.25', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'bestiaSQL.25' AND Cuerpo_Contenido LIKE 'El mejor truco%'), 'No Me Gusta'),
+('bestiaSQL.25', 'mcervantes.02', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'mcervantes.02' AND Cuerpo_Contenido LIKE 'La lectura del Quijote%'), 'Me Gusta'),
+('aagromeko.17', 'bestiaSQL.25', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'bestiaSQL.25' AND Cuerpo_Contenido LIKE 'El mejor truco%'), 'Me Gusta'),
+('bestiaSQL.25', 'empolar.20', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'empolar.20' AND Cuerpo_Contenido LIKE '¡Abrimos convocatoria%'), 'Me Gusta'),
+('qdmancha.22', 'smpanza.22', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'smpanza.22' AND Cuerpo_Contenido LIKE 'Comiendo morcillas%'), 'No Me Gusta'),
+('cjmarlow.20', 'telawrence.04', (SELECT FechaHora_Creacion FROM Contenido WHERE Usuario_Creador = 'telawrence.04' AND Cuerpo_Contenido LIKE 'La vasta soledad%'), 'Me Gusta');
+
