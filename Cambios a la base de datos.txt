@@ -1,4 +1,8 @@
 ALTER TABLE Se_Relaciona
+ADD CONSTRAINT CK_No_Autorelacion
+CHECK (Usuario_Receptor <> Usuario_Solicitante);
+
+ALTER TABLE Se_Relaciona
 ADD COLUMN estado VARCHAR(15) NOT NULL DEFAULT 'Pendiente',
 ADD CONSTRAINT CK_Estado_Relacion CHECK (estado IN ('Pendiente', 'Aceptada', 'Rechazada'));
 
@@ -86,3 +90,74 @@ EXCEPTION
         RAISE EXCEPTION 'Error al registrar la asistencia: %', SQLERRM;
 END;
 $$;
+
+CREATE OR REPLACE VIEW reporte_conectividad_red AS
+SELECT 
+    u.Cuenta AS Usuario,
+    COUNT(sr_recibida.Usuario_Solicitante) AS Total_Seguidores,
+    COUNT(sr_enviada.Usuario_Receptor) AS Total_Seguidos,
+    (COUNT(sr_recibida.Usuario_Solicitante) + COUNT(sr_enviada.Usuario_Receptor)) AS Total_Conexiones
+FROM 
+    Usuario u
+LEFT JOIN 
+    Se_Relaciona sr_recibida ON u.Cuenta = sr_recibida.Usuario_Receptor -- Relaciones que recibe
+LEFT JOIN 
+    Se_Relaciona sr_enviada ON u.Cuenta = sr_enviada.Usuario_Solicitante -- Relaciones que hace
+GROUP BY 
+    u.Cuenta
+ORDER BY 
+    Total_Conexiones DESC;
+	
+CREATE TABLE Denuncia (
+    id_denuncia SERIAL PRIMARY KEY,
+    usuario_denunciante VARCHAR(15) NOT NULL REFERENCES Usuario(Cuenta),
+    usuario_denunciado VARCHAR(15) NOT NULL REFERENCES Usuario(Cuenta),
+    motivo VARCHAR(100),
+    fecha_denuncia DATE DEFAULT CURRENT_DATE,
+    estatus VARCHAR(20) DEFAULT 'Pendiente' CHECK (estatus IN ('Pendiente', 'Revisada', 'Descartada'))
+);
+
+-- Insertemos un par de datos falsos para probar el reporte
+INSERT INTO Denuncia (usuario_denunciante, usuario_denunciado, motivo) VALUES 
+('smpanza.22', 'qdmancha.22', 'Comportamiento errático con molinos'),
+('dtoboso.22', 'qdmancha.22', 'Acoso romántico no solicitado');
+
+CREATE OR REPLACE VIEW reporte_actividad_denuncias AS
+SELECT 
+    usuario_denunciado AS Usuario_Reportado,
+    COUNT(*) AS Cantidad_Denuncias,
+    STRING_AGG(motivo, ' | ') AS Motivos -- Junta todos los motivos en una sola línea
+FROM 
+    Denuncia
+GROUP BY 
+    usuario_denunciado
+ORDER BY 
+    Cantidad_Denuncias DESC;
+
+SELECT 
+    usuario_denunciado AS "Usuario Reportado",
+    COUNT(*) AS "Total Denuncias",
+    STRING_AGG(motivo, ' | ') AS "Motivos Agrupados" -- Agrupa los motivos para facilitar la lectura
+FROM 
+    Denuncia
+GROUP BY 
+    usuario_denunciado
+ORDER BY 
+    "Total Denuncias" DESC;
+	
+SELECT 
+    u.Cuenta AS "Usuario",
+    COUNT(DISTINCT recibida.Usuario_Solicitante) AS "Seguidores",
+    COUNT(DISTINCT enviada.Usuario_Receptor) AS "Seguidos",
+    (COUNT(DISTINCT recibida.Usuario_Solicitante) + COUNT(DISTINCT enviada.Usuario_Receptor)) AS "Total Conexiones"
+FROM 
+    Usuario u
+LEFT JOIN 
+    Se_Relaciona recibida ON u.Cuenta = recibida.Usuario_Receptor   -- Conteo de seguidores (relaciones recibidas)
+LEFT JOIN 
+    Se_Relaciona enviada ON u.Cuenta = enviada.Usuario_Solicitante   -- Conteo de seguidos (relaciones enviadas)
+GROUP BY 
+    u.Cuenta
+ORDER BY 
+    "Total Conexiones" DESC;
+	
