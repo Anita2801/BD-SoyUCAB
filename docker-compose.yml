@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: bd_soyucab_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bd_soyucab
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+      # Map files with .sql extension and numbered prefix to ensure execution order
+      - ./Tablas:/docker-entrypoint-initdb.d/01_Tablas.sql
+      - ./Inserts:/docker-entrypoint-initdb.d/02_Inserts.sql
+      - ./Actividades-Ana:/docker-entrypoint-initdb.d/03_Actividades.sql
+
+  jsreports:
+    image: jsreport/jsreport:3.11.3
+    container_name: bd_soyucab_reports
+    ports:
+      - "5489:5488"
+    environment:
+      extensions_postgresStore_host: db
+      extensions_postgresStore_port: 5432
+      extensions_postgresStore_user: postgres
+      extensions_postgresStore_password: password
+      extensions_postgresStore_database: bd_soyucab
+      # We just mount a local folder to persist templates
+    volumes:
+      - ./jsreport_data:/app/data
+    depends_on:
+      - db

@@ -1,0 +1,77 @@
+--Triggers
+CREATE OR REPLACE FUNCTION fn_insert_relacion_simetrica()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.Tipo_Relacion = 'Amistad' THEN
+        
+        IF NOT EXISTS (
+            SELECT 1 FROM Se_Relaciona
+            WHERE Usuario_Receptor = NEW.Usuario_Solicitante
+              AND Usuario_Solicitante = NEW.Usuario_Receptor
+        ) THEN
+            INSERT INTO Se_Relaciona
+            (Usuario_Receptor, Usuario_Solicitante, Tipo_Relacion, Fecha_Relacion)
+            VALUES
+            (NEW.Usuario_Solicitante, NEW.Usuario_Receptor, 'Amistad', NEW.Fecha_Relacion);
+        END IF;
+
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trg_relacion_simetrica
+AFTER INSERT ON Se_Relaciona
+FOR EACH ROW
+EXECUTE FUNCTION fn_insert_relacion_simetrica();
+
+--Constraints
+--Tipos de grupo
+ALTER TABLE Grupo
+ADD CONSTRAINT ck_tipo_grupo
+CHECK (Tipo_Grupo IN ('Público', 'Privado'));
+
+--Miembros del chat
+
+--Grupo Participa
+
+--Stored Procedure
+CREATE OR REPLACE PROCEDURE sugerir_candidatos(
+    p_carrera VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    SELECT 
+        p.CI,
+        p.Persona_Usuario AS usuario,
+        p.Primer_Nombre || ' ' || p.Primer_Apellido AS nombre,
+        COUNT(h.Habilidad) AS coincidencias_hab
+    FROM Persona p
+    JOIN Nexo n ON n.CI_Nexo = p.CI
+    LEFT JOIN Capacidad_Hab h ON h.CI = p.CI
+    WHERE n.Cod_Inst_Nexo = p_carrera
+    GROUP BY p.CI, p.Persona_Usuario, p.Primer_Nombre, p.Primer_Apellido
+    ORDER BY coincidencias_hab DESC;
+END;
+$$;
+
+--Función
+CREATE OR REPLACE FUNCTION fn_es_miembro(
+    p_usuario VARCHAR,
+    p_grupo VARCHAR
+)
+RETURNS BOOLEAN AS $$
+DECLARE
+    existe INT;
+BEGIN
+    SELECT COUNT(*) INTO existe
+    FROM Grupo_Participa
+    WHERE Nombre_Grupo = p_grupo
+      AND Usuario_Miembro = p_usuario;
+
+    RETURN existe > 0;
+END;
+$$ LANGUAGE plpgsql;

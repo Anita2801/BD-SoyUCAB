@@ -1,7 +1,6 @@
 --Inserts 
 
 --Usuario 
-
 INSERT INTO Usuario (Cuenta) VALUES ('qdmancha.22');
 INSERT INTO Usuario (Cuenta) VALUES ('smpanza.22');
 INSERT INTO Usuario (Cuenta) VALUES ('chbenengeli.19');
@@ -27,7 +26,6 @@ INSERT INTO Usuario (Cuenta) VALUES ('bestiaSQL.25');
 
 
 --Lugar
-
 INSERT INTO Lugar (ISO_Lugar, Nombre_L, Tipo_L, ISO_Superior) VALUES
 ('VE', 'Venezuela', 'País', NULL),
 ('CD', 'R.D. del Congo', 'País', NULL),
@@ -39,7 +37,6 @@ INSERT INTO Lugar (ISO_Lugar, Nombre_L, Tipo_L, ISO_Superior) VALUES
 
 
 --Persona 
-
 INSERT INTO Persona (CI, Persona_Usuario, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Sexo, Ubicacion_Persona) VALUES
 ('30000001', 'qdmancha.22', 'Quijote', NULL, 'de la Mancha', 'Cervantes', 'Masculino', 'VE-A'),
 ('30000002', 'smpanza.22', 'Sancho', 'Miguel', 'Panza', 'Saavedra', 'Masculino', 'VE-A'),
@@ -155,7 +152,6 @@ INSERT INTO Capacidad_Hab (CI, Habilidad) VALUES
 ('99999999', 'Programación'),
 ('99999999', 'Matemáticas');
 
-
 --Organizacion asociada
 INSERT INTO Organizacion_Asociada (RIF, OA_Usuario, Nombre_O, Ubicacion_OA) VALUES
 ('310000001', 'empolar.20', 'Empresas Polar', 'VE-A'),
@@ -169,7 +165,7 @@ INSERT INTO Organizacion_Asociada (RIF, OA_Usuario, Nombre_O, Ubicacion_OA) VALU
 ('310000009', 'duncan.20', 'Duncan', 'VE-A'),
 ('310000010', 'pepsico.20', 'Pepsico', 'VE-A');
 
---entidad institucional
+--Entidad institucional
 INSERT INTO Entidad_Institucional (Cod_Inst, Nombre_Ent_Inst, Cod_Inst_Sup) VALUES
 ('FACES', 'Facultad de Ciencias Economicas y Sociales', NULL),
 ('DERE', 'Facultad de Derecho', NULL),
@@ -194,7 +190,6 @@ INSERT INTO Entidad_Institucional (Cod_Inst, Nombre_Ent_Inst, Cod_Inst_Sup) VALU
 ('DIGE', 'Direccion de Gestón Estudinatil', 'SECR'),
 ('DIAF', 'Dirección de Administración y Finanzas', 'VIAD'),
 ('SEME', 'Servicios Medicos UCAB', 'SSST');
-
 
 --Nexo 
 INSERT INTO Nexo (CI_Nexo, Cod_Inst_Nexo) VALUES
@@ -224,8 +219,7 @@ INSERT INTO Publicacion (Titulo_Pub, Autor, Sinopsis_Pub, Fecha_Pub) VALUES
 ('Siete Pilares de Sabiduría', 'telawrence.04', 'Memorias de T. E. Lawrence sobre su participación en la Gran Revuelta Árabe contra el Imperio Otomano durante la Primera Guerra Mundial.', '1926-11-20');
 
 
---tiempo duración 
-
+--Tiempo duración 
 INSERT INTO Tiempo_Duracion (CI_T, Rol_T, Inst_T, Fecha_Inicio, Fecha_Fin) VALUES
 ('30000001', 'Estudiante', 'COMU', '2022-09-15', NULL),
 ('30000002', 'Estudiante', 'INFO', '2022-09-15', NULL),

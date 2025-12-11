@@ -57,7 +57,6 @@ CONSTRAINT C_Tipo_Rol check (Tipo_Rol in ('Estudiante', 'Profesor', 'Empleado', 
 Create table Habilidad 
 (Habilidad varchar (30) PRIMARY KEY); 
 
-
 --Contenido 
 Create table Contenido
 (Usuario_Creador varchar (15) NOT NULL,
@@ -151,14 +150,12 @@ Fecha_Pub DATE NOT NULL,
 PRIMARY KEY (Titulo_Pub, Autor), 
 CONSTRAINT FK_Autor FOREIGN KEY (Autor) REFERENCES Usuario (Cuenta));
 
-
 --Descripcion
 Create Table Descripcion
 (Descripcion VARCHAR (200) NOT NULL,
 Cuenta_Desc VARCHAR (15) NOT NULL,
 PRIMARY KEY (Descripcion, Cuenta_Desc),
 CONSTRAINT FK_Desc FOREIGN KEY (Cuenta_Desc) REFERENCES Usuario (Cuenta));
-
 
 --Capacidad Habilidad
 Create table Capacidad_Hab
@@ -167,7 +164,6 @@ Habilidad varchar (20) NOT NULL,
 Primary key (CI, Habilidad),
 CONSTRAINT HAB_CI FOREIGN KEY (CI) REFERENCES Persona (CI),
 CONSTRAINT HAB_HAB FOREIGN KEY (Habilidad) REFERENCES Habilidad (Habilidad));
-
 
 --Desempeña 
 Create Table Desempeña 
@@ -185,8 +181,7 @@ Primary Key (Cod_Inst_Nexo, CI_Nexo),
 CONSTRAINT FK_COD_INST_NEXO FOREIGN KEY (Cod_Inst_Nexo) REFERENCES Entidad_Institucional (Cod_Inst),
 CONSTRAINT FK_CI_NEXO FOREIGN KEY (CI_Nexo) REFERENCES Persona (CI));
 
-
---tIEMPO Duracion 
+--Tiempo Duracion 
 Create table Tiempo_Duracion 
 (Inst_T varchar (10) NOT NULL,
 CI_T varchar (15) NOT NULL,
