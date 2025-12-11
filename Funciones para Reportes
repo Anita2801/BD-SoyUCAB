@@ -1,0 +1,247 @@
+--Reporte ver Perfil
+
+--Funcion Contar Seguidores
+
+CREATE OR REPLACE FUNCTION contar_seguimiento(
+    p_cuenta_usuario VARCHAR(15)
+)
+RETURNS TABLE (
+    total_seguidores BIGINT, 
+    total_seguidos BIGINT     
+)
+AS $$
+SELECT 
+    (
+        SELECT COUNT(*)
+        FROM Se_Relaciona
+        WHERE 
+            Usuario_Receptor = p_cuenta_usuario 
+            AND Tipo_Relacion = 'Seguimiento'
+    ),
+
+    (
+        SELECT COUNT(*)
+        FROM Se_Relaciona
+        WHERE 
+            Usuario_Solicitante = p_cuenta_usuario 
+            AND Tipo_Relacion = 'Seguimiento'
+    );
+$$ LANGUAGE sql;
+
+
+
+
+
+
+--Funcion Obtener Perfil Usuario 
+
+CREATE OR REPLACE FUNCTION obtener_perfil_usuario(
+    p_cuenta_usuario VARCHAR(15) -- Parámetro de entrada: la cuenta a buscar
+)
+RETURNS TABLE (
+    Nombre_Usuario VARCHAR(15),
+    Tipo_Perfil TEXT,
+    Nombre_Completo TEXT, 
+    Ubicacion TEXT,
+    Descripcion TEXT,
+    total_seguidores BIGINT,
+    total_seguidos BIGINT
+)
+AS $$
+SELECT
+    -- Identificación y Tipo
+    U.Cuenta,
+    CASE
+        WHEN P.Persona_Usuario IS NOT NULL THEN 'Persona'::TEXT
+        WHEN OA.OA_Usuario IS NOT NULL THEN 'Organización Asociada'::TEXT
+        ELSE 'Indefinido/Base'::TEXT
+    END,
+    
+    -- Nombre Completo (Unificado)
+    COALESCE(
+        TRIM(
+            P.Primer_Nombre || ' ' || 
+            CASE WHEN P.Segundo_Nombre IS NOT NULL THEN P.Segundo_Nombre || ' ' ELSE '' END || 
+            P.Primer_Apellido || ' ' || 
+            P.Segundo_Apellido
+        ),
+        OA.Nombre_O,
+        'N/A'
+    ),
+    
+    -- Ubicación (Unificada)
+    COALESCE(
+        L_P.Nombre_L,
+        L_OA.Nombre_L,
+        'Ubicación Desconocida'
+    ),
+    
+    -- Descripción
+    D.Descripcion,
+    
+    -- Métricas de Seguimiento
+    CS.total_seguidores,
+    CS.total_seguidos
+
+FROM 
+    Usuario U
+
+-- 1. Resto de JOINs (van inmediatamente después del FROM)
+LEFT JOIN 
+    Persona P ON U.Cuenta = P.Persona_Usuario
+LEFT JOIN 
+    Lugar L_P ON P.Ubicacion_Persona = L_P.ISO_Lugar
+
+LEFT JOIN 
+    Organizacion_Asociada OA ON U.Cuenta = OA.OA_Usuario
+LEFT JOIN 
+    Lugar L_OA ON OA.Ubicacion_OA = L_OA.ISO_Lugar
+
+LEFT JOIN
+    Descripcion D ON U.Cuenta = D.Cuenta_Desc
+
+-- 2. Uso correcto de LEFT JOIN LATERAL para la función de retorno de tabla
+LEFT JOIN LATERAL 
+    contar_seguimiento(U.Cuenta) CS ON TRUE 
+
+-- ⚠️ CORRECCIÓN: La cláusula WHERE va al final de todos los JOINs
+WHERE 
+    U.Cuenta = p_cuenta_usuario;
+
+$$ LANGUAGE sql;
+
+
+
+
+
+
+
+--Funcion Select * From Contenido + Nombre Usuario 
+CREATE OR REPLACE FUNCTION obtener_posts_por_autor(
+    p_usuario_creador VARCHAR(15)      -- Usuario que creó el/los post(s)
+)
+RETURNS TABLE (
+    Autor_Usuario VARCHAR(15),          
+    Autor_Nombre_Completo TEXT,         
+    Fecha_Publicacion TIMESTAMP,        
+    Me_Gusta INTEGER,                   
+    No_Me_Gusta INTEGER,                
+    Cuerpo_Post VARCHAR(300)            
+)
+AS $$
+SELECT
+    C.Usuario_Creador,
+    
+    -- Unificación del Nombre del Autor
+    COALESCE(
+        -- Si es Persona: Concatena Primer Nombre, Segundo Nombre, Primer Apellido y Segundo Apellido
+        TRIM(
+            P.Primer_Nombre || ' ' || 
+            CASE WHEN P.Segundo_Nombre IS NOT NULL THEN P.Segundo_Nombre || ' ' ELSE '' END || 
+            P.Primer_Apellido || ' ' || 
+            P.Segundo_Apellido
+        ),
+        -- Si es Organización Asociada: Utiliza el Nombre de la Organización
+        OA.Nombre_O,
+        'Autor Desconocido'
+    ),
+    
+    C.FechaHora_Creacion,
+    C.Nro_Me_Gusta,
+    C.Nro_No_Me_Gusta,
+    C.Cuerpo_Contenido
+
+FROM 
+    Contenido C
+
+-- Unirse a Usuario 
+JOIN 
+    Usuario U ON C.Usuario_Creador = U.Cuenta
+
+-- 1. Unirse con Persona (LEFT JOIN)
+LEFT JOIN 
+    Persona P ON U.Cuenta = P.Persona_Usuario
+
+-- 2. Unirse con Organización Asociada (LEFT JOIN)
+LEFT JOIN 
+    Organizacion_Asociada OA ON U.Cuenta = OA.OA_Usuario
+
+-- ⚠️ FILTRADO AJUSTADO: Solo devolvemos el contenido que coincide con el usuario creador
+WHERE 
+    C.Usuario_Creador = p_usuario_creador
+    
+-- Opcional: Ordenamos para ver el contenido cronológicamente (más reciente primero)
+ORDER BY
+    C.FechaHora_Creacion DESC;
+
+$$ LANGUAGE sql;
+
+
+
+
+
+
+
+
+
+
+
+--Reporte de Buscador 
+CREATE OR REPLACE FUNCTION buscar_contenido_por_texto(
+    p_termino_busqueda TEXT      -- El texto o frase que el usuario ingresa en la barra de búsqueda
+)
+RETURNS TABLE (
+    Autor_Usuario VARCHAR(15),          -- El nombre de la cuenta del creador
+    Autor_Nombre_Completo TEXT,         -- Nombre y Apellidos (Persona) o Nombre_O (Organización)
+    Fecha_Publicacion TIMESTAMP,        -- Fecha de creación del post
+    Me_Gusta INTEGER,                   -- Nro_Me_Gusta
+    No_Me_Gusta INTEGER,                -- Nro_No_Me_Gusta
+    Cuerpo_Post VARCHAR(300)            -- Cuerpo_Contenido
+)
+AS $$
+SELECT
+    C.Usuario_Creador,
+    
+    -- Unificación del Nombre del Autor
+    COALESCE(
+        -- Si es Persona
+        TRIM(
+            P.Primer_Nombre || ' ' || 
+            CASE WHEN P.Segundo_Nombre IS NOT NULL THEN P.Segundo_Nombre || ' ' ELSE '' END || 
+            P.Primer_Apellido || ' ' || 
+            P.Segundo_Apellido
+        ),
+        -- Si es Organización Asociada
+        OA.Nombre_O,
+        'Autor Desconocido'
+    ),
+    
+    C.FechaHora_Creacion,
+    C.Nro_Me_Gusta,
+    C.Nro_No_Me_Gusta,
+    C.Cuerpo_Contenido
+
+FROM 
+    Contenido C
+
+-- Unirse a Usuario 
+JOIN 
+    Usuario U ON C.Usuario_Creador = U.Cuenta
+
+-- 1. Unirse con Persona (LEFT JOIN)
+LEFT JOIN 
+    Persona P ON U.Cuenta = P.Persona_Usuario
+
+-- 2. Unirse con Organización Asociada (LEFT JOIN)
+LEFT JOIN 
+    Organizacion_Asociada OA ON U.Cuenta = OA.OA_Usuario
+
+-- ⚠️ CONDICIÓN DE BÚSQUEDA CLAVE
+WHERE 
+    C.Cuerpo_Contenido ILIKE '%' || p_termino_busqueda || '%'
+    
+-- Ordenamos para mostrar el contenido más reciente que coincida con la búsqueda
+ORDER BY
+    C.FechaHora_Creacion DESC;
+
+$$ LANGUAGE sql;
