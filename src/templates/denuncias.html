@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .table-section {
+            flex: 1;
+        }
+
+        .chart-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdd7ee;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #d6eaf8;
+            color: #2c3e50;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f9fd;
+        }
+
+        img {
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #bdd7ee;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reporte de Actividad de Denuncias</h1>
+
+    <div class="container">
+        <div class="table-section">
+            <h3 style="color: #2c3e50; margin-top: 0;">Detalle</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario Reportado</th>
+                        <th>Cantidad</th>
+                        <th>Motivos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{rows}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-section">
+            <h3 style="color: #2c3e50; margin-top: 0;">Gráfico de Denuncias</h3>
+            <img src="{{chartImage}}" />
+        </div>
+    </div>
+</body>
+
+</html>

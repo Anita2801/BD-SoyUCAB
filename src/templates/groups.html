@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdd7ee;
+            padding: 12px;
+            text-align: left;
+        }
+
+        /* Light blue header */
+        th {
+            background-color: #d6eaf8;
+            color: #2c3e50;
+        }
+
+        /* Alternating rows light blueish */
+        tr:nth-child(even) {
+            background-color: #f4f9fd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reporte de Rendimiento de Grupos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Tipo</th>
+                <th>Total Miembros</th>
+                <th>Fundadores</th>
+                <th>Moderadores</th>
+                <th>Miembros Reg.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{rows}}
+        </tbody>
+    </table>
+</body>
+
+</html>

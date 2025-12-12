@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            /* Center the content */
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            /* For absolute positioning of total box if needed, or just flow */
+            flex-direction: column;
+            /* Stack them */
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .total-box {
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            align-self: center;
+            /* Ensure box is also centered */
+        }
+
+        .total-label {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        .total-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdd7ee;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #d6eaf8;
+            color: #2c3e50;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f9fd;
+        }
+
+        .map-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>Reporte de Diáspora</h1>
+        <div class="total-box">
+            <div class="total-label">Total Global</div>
+            <div class="total-value">{{totalPeople}} egresados</div>
+        </div>
+    </div>
+
+    <div class="map-section">
+        <h3 style="margin-top: 0; color: #7f8c8d;">Mapa de Concentración Global</h3>
+        <img src="{{mapImage}}" style="width: 100%; max-width: 800px;" />
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ubicación</th>
+                <th>Tipo</th>
+                <th>Total Personas</th>
+                <th>Roles Presentes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{rows}}
+        </tbody>
+    </table>
+</body>
+
+</html>

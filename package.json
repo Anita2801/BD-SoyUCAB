@@ -22,7 +22,10 @@
     "axios": "^1.13.2",
     "canvas": "^3.2.0",
     "chart.js": "^4.5.1",
+    "chartjs-chart-geo": "^4.3.6",
     "chartjs-node-canvas": "^5.0.0",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   }
 }

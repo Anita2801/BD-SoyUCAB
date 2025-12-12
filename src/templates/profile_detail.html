@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #bdd7ee;
+            padding-bottom: 10px;
+        }
+
+        .profile-card {
+            background-color: #f4f9fd;
+            border: 1px solid #bdd7ee;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .row {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e1e8ed;
+            padding-bottom: 5px;
+        }
+
+        .label {
+            font-weight: bold;
+            width: 150px;
+            color: #2c3e50;
+        }
+
+        .value {
+            flex: 1;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            background-color: #d6eaf8;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #154360;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Perfil de Usuario</h1>
+
+    <div class="profile-card">
+        <div class="row">
+            <div class="label">Cuenta:</div>
+            <div class="value">{{nombre_usuario}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Nombre Completo:</div>
+            <div class="value">{{nombre_completo}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Tipo:</div>
+            <div class="value">{{tipo_perfil}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Ubicación:</div>
+            <div class="value">{{ubicacion}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Descripción:</div>
+            <div class="value">{{descripcion}}</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">{{total_seguidores}}</div>
+                <div class="stat-label">Seguidores</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{total_seguidos}}</div>
+                <div class="stat-label">Seguidos</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
-const { getMetrics } = require('./db');
+const { getMetrics } = require('../db');
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 
 const JSREPORT_URL = 'http://localhost:5489/api/report';
@@ -65,7 +65,7 @@ async function generateReport() {
 
     // --- Prepare HTML ---
     console.log('Injecting data into template...');
-    let html = fs.readFileSync(path.join(__dirname, 'templates', 'dashboard.html'), 'utf-8');
+    let html = fs.readFileSync(path.join(__dirname, '../templates', 'dashboard.html'), 'utf-8');
 
     // Replace Metrics
     html = html.replace('{{totalMembers}}', metrics.totalMembers);
@@ -103,8 +103,8 @@ async function generateReport() {
             responseType: 'arraybuffer'
         });
 
-        fs.writeFileSync('community_report.pdf', response.data);
-        console.log('Success! Report saved to community_report.pdf');
+        fs.writeFileSync(path.join(__dirname, '../../reports', 'community_report.pdf'), response.data);
+        console.log('Success! Report saved to reports/community_report.pdf');
     } catch (e) {
         console.error('Error generating report:', e.message);
         if (e.response) {
