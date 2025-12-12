@@ -28,6 +28,7 @@ const chartCallback = (ChartJS) => {
 };
 const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, chartCallback });
 
+// Keep this function for the donut chart
 async function generateChartImage(configuration) {
     return await chartJSNodeCanvas.renderToBuffer(configuration);
 }
@@ -40,31 +41,7 @@ async function generateReport() {
     // --- Generate Charts Server-Side ---
     console.log('Generating charts server-side...');
 
-    // 1. Growth Line Chart
-    const growthConfig = {
-        type: 'line',
-        data: {
-            labels: metrics.growth.map(d => d.month),
-            datasets: [{
-                label: 'Nuevos Usuarios',
-                data: metrics.growth.map(d => d.count),
-                borderColor: '#3498db',
-                backgroundColor: 'rgba(52, 152, 219, 0.2)',
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            plugins: {
-                legend: { labels: { font: { size: 20 } } }
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    };
-    const growthBuffer = await generateChartImage(growthConfig);
-    const growthBase64 = `data:image/png;base64,${growthBuffer.toString('base64')}`;
+
 
     // 2. Type Doughnut Chart
     const typeConfig = {
@@ -96,7 +73,7 @@ async function generateReport() {
     html = html.replace('{{activityRate}}', metrics.activityRate);
 
     // Replace Chart Images
-    html = html.replace('{{growthChartImage}}', growthBase64);
+
     html = html.replace('{{typeChartImage}}', typeBase64);
 
     // Render Table Rows

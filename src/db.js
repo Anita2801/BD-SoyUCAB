@@ -37,24 +37,12 @@ const getMetrics = async () => {
         `);
         const distribution = distributionRes.rows;
 
-        // 5. Growth Evolution (MOCKED because Fecha_Registro does not exist)
-        // Returning static data for demonstration purposes
-        const growth = [
-            { month: 'Jan', count: 12 },
-            { month: 'Feb', count: 19 },
-            { month: 'Mar', count: 3 },
-            { month: 'Apr', count: 5 },
-            { month: 'May', count: 2 },
-            { month: 'Jun', count: 3 }
-        ];
 
-        // 6. Top 10 Faculties
+
+        // 5. Top Faculties (using view vw_crecimiento_comunidad)
         const facultyRes = await client.query(`
-            SELECT e.Nombre_Ent_Inst, COUNT(n.CI_Nexo) as members
-            FROM Entidad_Institucional e
-            JOIN Nexo n ON e.Cod_Inst = n.Cod_Inst_Nexo
-            GROUP BY e.Nombre_Ent_Inst
-            ORDER BY members DESC
+            SELECT nombre_carrera AS nombre_ent_inst, total_miembros AS members
+            FROM vw_crecimiento_comunidad
             LIMIT 10
         `);
         const faculties = facultyRes.rows;
@@ -64,7 +52,7 @@ const getMetrics = async () => {
             newMembers,
             activityRate,
             distribution,
-            growth,
+            distribution,
             faculties
         };
 
