@@ -1,0 +1,30 @@
+Guía de Arquitectura: Docker, jsreport y PostgreSQL
+
+Este documento explica cómo funcionan integrados estos tres componentes dentro del proyecto, ideal para entender la infraestructura detrás de la generación de reportes.
+
+#1. Visión General
+El proyecto utiliza Docker para contenerizar la aplicación, lo que significa que cada servicio (base de datos y servidor de reportes) vive en su propio entorno aislado pero interconectado. Esto elimina la necesidad de instalar dependencias complejas en la máquina de cada desarrollador.
+
+Los dos servicios principales son:
+1.  Base de Datos ('db'): Un contenedor con PostgreSQL.
+2.  Motor de Reportes ('jsreports'): Un contenedor con Jsreport.
+
+#2. Comunicación entre Servicios
+Docker crea una red virtual privada.
+
+- Nombres de Servicio como Hostnames: Dentro de esta red, los contenedores no usan direcciones IP fijas ni "localhost" para hablar entre ellos. Usan el nombre del servicio definido en 'docker-compose.yml'.
+    - Para el contenedor de reportes, la base de datos se llama simplemente 'db'.
+
+#3. Configuración del Servicio 'jsreports'
+El servicio de reportes está configurado para conectarse automáticamente a la base de datos al iniciarse, gracias a las variables de entorno.
+
+#4. Persistencia de Datos (Volúmenes)
+Los contenedores son efímeros (si se borran, se pierden sus datos), por lo que usamos **volúmenes** para guardar la información importante en el disco duro de la computadora anfitriona.
+
+## Resumen 
+1.  Al ejecutar 'docker-compose up', se levanta la red y los servicios.
+2.  El servicio 'db' inicia y prepara la base de datos.
+3.  El servicio 'jsreports' espera a que la BD esté lista y se conecta usando las credenciales internas.
+4.  El usuario/desarrollador puede:
+    - Ver los reportes en 'localhost:5489'.
+    - Consultar la BD en 'localhost:5433'.
