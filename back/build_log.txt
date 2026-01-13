@@ -1,0 +1,639 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< soyucab:back >----------------------------
+[INFO] Building back 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ back ---
+[INFO] Deleting C:\Users\Gabriela\Documents\GitHub\BD-SoyUCAB\back\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ back ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ back ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 107 source files with javac [debug release 17] to target\classes
+[INFO] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java: C:\Users\Gabriela\Documents\GitHub\BD-SoyUCAB\back\src\main\java\com\soyucab\back\config\ApplicationConfig.java uses or overrides a deprecated API.
+[INFO] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java: Recompile with -Xlint:deprecation for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/ChatService.java:[214,5] org.springframework.transaction.annotation.Transactional is not a repeatable annotation type
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[50,39] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[51,64] cannot find symbol
+  symbol:   method getPassword()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[54,39] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[55,21] cannot find symbol
+  symbol:   method setEmail(java.lang.String)
+  location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[58,39] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[59,41] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[64,28] cannot find symbol
+  symbol:   method getCi()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[64,56] cannot find symbol
+  symbol:   method getCi()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[66,46] cannot find symbol
+  symbol:   method getCi()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[67,32] cannot find symbol
+  symbol:   method setUsuario(com.soyucab.back.model.Usuario)
+  location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[68,56] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[69,57] cannot find symbol
+  symbol:   method getSegundoNombre()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[70,58] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[71,59] cannot find symbol
+  symbol:   method getSegundoApellido()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,32] cannot find symbol
+  symbol:   method setSexo(request.ge[...]cado")
+  location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,48] cannot find symbol
+  symbol:   method getSexo()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,76] cannot find symbol
+  symbol:   method getSexo()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[75,36] cannot find symbol
+  symbol:   method getLugarIso()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[75,70] cannot find symbol
+  symbol:   method getLugarIso()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[76,79] cannot find symbol
+  symbol:   method getLugarIso()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[77,40] cannot find symbol
+  symbol:   method setLugar(com.soyucab.back.model.Lugar)
+  location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[81,36] cannot find symbol
+  symbol:   method getRol()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[81,65] cannot find symbol
+  symbol:   method getRol()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[82,73] cannot find symbol
+  symbol:   method getRol()
+  location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[86,48] cannot find symbol
+  symbol:   method setRoles(java.util.List<com.soyucab.back.model.Rol>)
+  location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[94,48] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[94,66] cannot find symbol
+  symbol:   method getPassword()
+  location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[97,36] cannot find symbol
+  symbol:   method builder()
+  location: class com.soyucab.back.dto.AuthResponse
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[105,56] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[106,56] cannot find symbol
+  symbol:   method getPassword()
+  location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[107,55] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[114,36] cannot find symbol
+  symbol:   method builder()
+  location: class com.soyucab.back.dto.AuthResponse
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[26,26] cannot find symbol
+  symbol:   method getCuenta()
+  location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[27,26] cannot find symbol
+  symbol:   method getPassword()
+  location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[27,52] cannot find symbol
+  symbol:   method getPassword()
+  location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[38,35] cannot find symbol
+  symbol:   method getId()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[41,44] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[49,22] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[50,32] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[51,22] cannot find symbol
+  symbol:   method getSegundoNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[51,55] cannot find symbol
+  symbol:   method getSegundoNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[52,44] cannot find symbol
+  symbol:   method getSegundoNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[53,22] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[54,44] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[55,22] cannot find symbol
+  symbol:   method getSegundoApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[55,57] cannot find symbol
+  symbol:   method getSegundoApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[56,44] cannot find symbol
+  symbol:   method getSegundoApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[59,22] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[59,53] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[60,34] cannot find symbol
+  symbol:   method getPrimerNombre()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[60,72] cannot find symbol
+  symbol:   method getPrimerApellido()
+  location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[67,44] cannot find symbol
+  symbol:   method getNombre()
+  location: class com.soyucab.back.model.OrganizacionAsociada
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[74,26] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[75,37] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[79,16] cannot find symbol
+  symbol:   method setActorName(java.lang.String)
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[80,16] cannot find symbol
+  symbol:   method setActorAvatar(java.lang.String)
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[81,16] cannot find symbol
+  symbol:   method setAction(r.getReacc[...]0f3n")
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[82,22] cannot find symbol
+  symbol:   method getReaccion()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[83,16] cannot find symbol
+  symbol:   method setContentPreview(r.getConte[...]rpo())
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[84,22] cannot find symbol
+  symbol:   method getContenido()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[84,67] cannot find symbol
+  symbol:   method getContenido()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[85,32] cannot find symbol
+  symbol:   method getContenido()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[86,26] cannot find symbol
+  symbol:   method getContenido()
+  location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[88,16] cannot find symbol
+  symbol:   method setType(java.lang.String)
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[89,16] cannot find symbol
+  symbol:   method setRead(boolean)
+  location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[57,46] cannot find symbol
+  symbol:   method getNombre()
+  location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[63,27] cannot find symbol
+  symbol:   method setNombre(java.lang.String)
+  location: variable nuevoGrupo of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[64,55] cannot find symbol
+  symbol:   method getDescripcion()
+  location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[65,48] cannot find symbol
+  symbol:   method getTipo()
+  location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[73,93] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[74,33] cannot find symbol
+  symbol:   method setGrupo(com.soyucab.back.model.Grupo)
+  location: variable nuevoMiembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[75,52] cannot find symbol
+  symbol:   method getUsuario()
+  location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[76,48] cannot find symbol
+  symbol:   method getRol()
+  location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[87,50] cannot find symbol
+  symbol:   method getDescripcion()
+  location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[88,43] cannot find symbol
+  symbol:   method getTipo()
+  location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[106,54] constructor GrupoParticipaId in class com.soyucab.back.model.GrupoParticipaId cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[112,54] constructor GrupoParticipaId in class com.soyucab.back.model.GrupoParticipaId cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[114,19] cannot find symbol
+  symbol:   method setRol(java.lang.String)
+  location: variable member of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/TestController.java:[19,20] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable usuario of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/TestController.java:[29,59] cannot find symbol
+  symbol:   method getPassword()
+  location: variable usuario of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[31,50] cannot find symbol
+  symbol:   method getNombre()
+  location: variable grupo of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[77,56] cannot find symbol
+  symbol:   method getGrupo()
+  location: variable gp of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[78,37] cannot find symbol
+  symbol:   method getRol()
+  location: variable gp of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[18,29] cannot find symbol
+  symbol:   method getNombre()
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[19,34] cannot find symbol
+  symbol:   method getDescripcion()
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[20,59] cannot find symbol
+  symbol:   method getTipo()
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,12] cannot find symbol
+  symbol:   method setNumeroMiembros(long)
+  location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,37] cannot find symbol
+  symbol:   method getMiembros()
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,75] cannot find symbol
+  symbol:   method getMiembros()
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[29,29] cannot find symbol
+  symbol:   method getNombre()
+  location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[30,34] cannot find symbol
+  symbol:   method getDescripcion()
+  location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[31,15] cannot find symbol
+  symbol:   method setTipo(Boolean.TR[...]lico")
+  location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[31,47] cannot find symbol
+  symbol:   method getEsPrivado()
+  location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[39,19] cannot find symbol
+  symbol:   method getId()
+  location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[40,38] cannot find symbol
+  symbol:   method getId()
+  location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[41,41] cannot find symbol
+  symbol:   method getId()
+  location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[43,26] cannot find symbol
+  symbol:   method getRol()
+  location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[52,30] cannot find symbol
+  symbol:   method getNombreGrupo()
+  location: variable dto of type com.soyucab.back.dto.GrupoParticipaDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[53,33] cannot find symbol
+  symbol:   method getUsuarioMiembro()
+  location: variable dto of type com.soyucab.back.dto.GrupoParticipaDTO
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  25.202 s
+[INFO] Finished at: 2026-01-13T15:56:13-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project back: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/ChatService.java:[214,5] org.springframework.transaction.annotation.Transactional is not a repeatable annotation type
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[50,39] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[51,64] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[54,39] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[55,21] cannot find symbol
+[ERROR]   symbol:   method setEmail(java.lang.String)
+[ERROR]   location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[58,39] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[59,41] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[64,28] cannot find symbol
+[ERROR]   symbol:   method getCi()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[64,56] cannot find symbol
+[ERROR]   symbol:   method getCi()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[66,46] cannot find symbol
+[ERROR]   symbol:   method getCi()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[67,32] cannot find symbol
+[ERROR]   symbol:   method setUsuario(com.soyucab.back.model.Usuario)
+[ERROR]   location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[68,56] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[69,57] cannot find symbol
+[ERROR]   symbol:   method getSegundoNombre()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[70,58] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[71,59] cannot find symbol
+[ERROR]   symbol:   method getSegundoApellido()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,32] cannot find symbol
+[ERROR]   symbol:   method setSexo(request.ge[...]cado")
+[ERROR]   location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,48] cannot find symbol
+[ERROR]   symbol:   method getSexo()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[72,76] cannot find symbol
+[ERROR]   symbol:   method getSexo()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[75,36] cannot find symbol
+[ERROR]   symbol:   method getLugarIso()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[75,70] cannot find symbol
+[ERROR]   symbol:   method getLugarIso()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[76,79] cannot find symbol
+[ERROR]   symbol:   method getLugarIso()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[77,40] cannot find symbol
+[ERROR]   symbol:   method setLugar(com.soyucab.back.model.Lugar)
+[ERROR]   location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[81,36] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[81,65] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[82,73] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable request of type com.soyucab.back.dto.RegisterRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[86,48] cannot find symbol
+[ERROR]   symbol:   method setRoles(java.util.List<com.soyucab.back.model.Rol>)
+[ERROR]   location: variable persona of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[94,48] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[94,66] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable user of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[97,36] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.soyucab.back.dto.AuthResponse
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[105,56] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[106,56] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[107,55] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable request of type com.soyucab.back.dto.LoginRequest
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/AuthService.java:[114,36] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.soyucab.back.dto.AuthResponse
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[26,26] cannot find symbol
+[ERROR]   symbol:   method getCuenta()
+[ERROR]   location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[27,26] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/config/ApplicationConfig.java:[27,52] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable u of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[38,35] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[41,44] cannot find symbol
+[ERROR]   symbol:   method getUsuario()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[49,22] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[50,32] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[51,22] cannot find symbol
+[ERROR]   symbol:   method getSegundoNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[51,55] cannot find symbol
+[ERROR]   symbol:   method getSegundoNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[52,44] cannot find symbol
+[ERROR]   symbol:   method getSegundoNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[53,22] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[54,44] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[55,22] cannot find symbol
+[ERROR]   symbol:   method getSegundoApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[55,57] cannot find symbol
+[ERROR]   symbol:   method getSegundoApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[56,44] cannot find symbol
+[ERROR]   symbol:   method getSegundoApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[59,22] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[59,53] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[60,34] cannot find symbol
+[ERROR]   symbol:   method getPrimerNombre()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[60,72] cannot find symbol
+[ERROR]   symbol:   method getPrimerApellido()
+[ERROR]   location: variable p of type com.soyucab.back.model.Persona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[67,44] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: class com.soyucab.back.model.OrganizacionAsociada
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[74,26] cannot find symbol
+[ERROR]   symbol:   method getUsuario()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[75,37] cannot find symbol
+[ERROR]   symbol:   method getUsuario()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[79,16] cannot find symbol
+[ERROR]   symbol:   method setActorName(java.lang.String)
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[80,16] cannot find symbol
+[ERROR]   symbol:   method setActorAvatar(java.lang.String)
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[81,16] cannot find symbol
+[ERROR]   symbol:   method setAction(r.getReacc[...]0f3n")
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[82,22] cannot find symbol
+[ERROR]   symbol:   method getReaccion()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[83,16] cannot find symbol
+[ERROR]   symbol:   method setContentPreview(r.getConte[...]rpo())
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[84,22] cannot find symbol
+[ERROR]   symbol:   method getContenido()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[84,67] cannot find symbol
+[ERROR]   symbol:   method getContenido()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[85,32] cannot find symbol
+[ERROR]   symbol:   method getContenido()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[86,26] cannot find symbol
+[ERROR]   symbol:   method getContenido()
+[ERROR]   location: variable r of type com.soyucab.back.model.Reacciona
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[88,16] cannot find symbol
+[ERROR]   symbol:   method setType(java.lang.String)
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/NotificacionesService.java:[89,16] cannot find symbol
+[ERROR]   symbol:   method setRead(boolean)
+[ERROR]   location: variable dto of type com.soyucab.back.controller.dto.NotificationDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[57,46] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[63,27] cannot find symbol
+[ERROR]   symbol:   method setNombre(java.lang.String)
+[ERROR]   location: variable nuevoGrupo of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[64,55] cannot find symbol
+[ERROR]   symbol:   method getDescripcion()
+[ERROR]   location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[65,48] cannot find symbol
+[ERROR]   symbol:   method getTipo()
+[ERROR]   location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[73,93] cannot find symbol
+[ERROR]   symbol:   method getUsuario()
+[ERROR]   location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[74,33] cannot find symbol
+[ERROR]   symbol:   method setGrupo(com.soyucab.back.model.Grupo)
+[ERROR]   location: variable nuevoMiembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[75,52] cannot find symbol
+[ERROR]   symbol:   method getUsuario()
+[ERROR]   location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[76,48] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable miembro of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[87,50] cannot find symbol
+[ERROR]   symbol:   method getDescripcion()
+[ERROR]   location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[88,43] cannot find symbol
+[ERROR]   symbol:   method getTipo()
+[ERROR]   location: variable grupoDetails of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[106,54] constructor GrupoParticipaId in class com.soyucab.back.model.GrupoParticipaId cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[112,54] constructor GrupoParticipaId in class com.soyucab.back.model.GrupoParticipaId cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/service/GrupoService.java:[114,19] cannot find symbol
+[ERROR]   symbol:   method setRol(java.lang.String)
+[ERROR]   location: variable member of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/TestController.java:[19,20] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable usuario of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/TestController.java:[29,59] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable usuario of type com.soyucab.back.model.Usuario
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[31,50] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: variable grupo of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[77,56] cannot find symbol
+[ERROR]   symbol:   method getGrupo()
+[ERROR]   location: variable gp of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/controller/GrupoController.java:[78,37] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable gp of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[18,29] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[19,34] cannot find symbol
+[ERROR]   symbol:   method getDescripcion()
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[20,59] cannot find symbol
+[ERROR]   symbol:   method getTipo()
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,12] cannot find symbol
+[ERROR]   symbol:   method setNumeroMiembros(long)
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,37] cannot find symbol
+[ERROR]   symbol:   method getMiembros()
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[21,75] cannot find symbol
+[ERROR]   symbol:   method getMiembros()
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[29,29] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[30,34] cannot find symbol
+[ERROR]   symbol:   method getDescripcion()
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[31,15] cannot find symbol
+[ERROR]   symbol:   method setTipo(Boolean.TR[...]lico")
+[ERROR]   location: variable entity of type com.soyucab.back.model.Grupo
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[31,47] cannot find symbol
+[ERROR]   symbol:   method getEsPrivado()
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[39,19] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[40,38] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[41,41] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[43,26] cannot find symbol
+[ERROR]   symbol:   method getRol()
+[ERROR]   location: variable entity of type com.soyucab.back.model.GrupoParticipa
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[52,30] cannot find symbol
+[ERROR]   symbol:   method getNombreGrupo()
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoParticipaDTO
+[ERROR] /C:/Users/Gabriela/Documents/GitHub/BD-SoyUCAB/back/src/main/java/com/soyucab/back/mapper/GroupMapper.java:[53,33] cannot find symbol
+[ERROR]   symbol:   method getUsuarioMiembro()
+[ERROR]   location: variable dto of type com.soyucab.back.dto.GrupoParticipaDTO
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

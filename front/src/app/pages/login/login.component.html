@@ -1,0 +1,157 @@
+<div class="min-h-screen flex bg-gray-100">
+  <!-- Left Side - Gradient & Info (Hidden on mobile, visible on lg screens) -->
+  <div
+    class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-yellow-400 via-teal-500 to-blue-600 flex-col justify-center px-12 text-white relative overflow-hidden">
+    <div class="relative z-10 max-w-lg">
+      <div class="flex items-center gap-3 mb-6">
+        <!-- Logo -->
+        <img src="/assets/images/logo-ucab-sinfondo.png" alt="Logo UCAB" class="h-16 w-auto">
+        <h1 class="text-4xl font-bold">SoyUCAB</h1>
+      </div>
+
+      <h2 class="text-3xl font-semibold mb-6">Conecta con la comunidad universitaria</h2>
+      <p class="text-lg opacity-90 mb-10">Red social exclusiva para estudiantes, profesores, egresados y personal de la
+        Universidad Católica Andrés Bello.</p>
+
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="bg-white/20 p-2 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">Comparte tu conocimiento</h3>
+            <p class="text-sm opacity-80">Publica contenido, documentos y eventos académicos</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/20 p-2 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">Construye tu red</h3>
+            <p class="text-sm opacity-80">Conecta con compañeros, profesores y egresados</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/20 p-2 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">Oportunidades profesionales</h3>
+            <p class="text-sm opacity-80">Descubre pasantías, empleos y colaboraciones</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side - Login Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
+    <div class="bg-white p-10 rounded-xl shadow-lg w-full max-w-md border border-gray-100">
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Bienvenido de vuelta</h2>
+        <p class="text-gray-500 text-sm mt-1">Ingresa a tu cuenta para continuar</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="mb-5">
+          <label for="cuenta" class="block text-gray-600 text-xs font-semibold mb-2">Correo institucional</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+            </div>
+            <input type="text" id="cuenta" name="cuenta" [(ngModel)]="credentials.cuenta" required
+              class="pl-10 w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+              placeholder="tu.nombre@ucab.edu.ve">
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="password" class="block text-gray-600 text-xs font-semibold mb-2">Contraseña</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input [type]="showPassword ? 'text' : 'password'" id="password" name="password"
+              [(ngModel)]="credentials.password" required
+              class="pl-10 w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+              placeholder="********">
+            <div (click)="togglePassword()"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600">
+              <!-- Password Visibility Toggle -->
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <!-- Eye Off Icon (when visible) -->
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-6">
+          <label class="flex items-center text-sm text-gray-600">
+            <input type="checkbox"
+              class="form-checkbox h-4 w-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500">
+            <span class="ml-2">Recordarme</span>
+          </label>
+          <a href="#" class="text-sm text-teal-600 hover:text-teal-800 font-semibold">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <div *ngIf="errorMessage"
+          class="mb-4 bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm border border-red-100 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clip-rule="evenodd" />
+          </svg>
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" [disabled]="!loginForm.form.valid"
+          class="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 transition duration-300 shadow-md">
+          Iniciar sesión
+        </button>
+
+        <div class="mt-8 text-center text-sm text-gray-500">
+          ¿No tienes una cuenta? <a href="/register" class="text-teal-600 hover:text-teal-800 font-bold">Regístrate
+            aquí</a>
+        </div>
+
+        <div class="mt-8 border-t border-gray-100 pt-6 text-center text-xs text-gray-400">
+          © 2026 SoyUCAB - Universidad Católica Andrés Bello
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

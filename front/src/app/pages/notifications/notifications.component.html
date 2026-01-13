@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow border border-gray-100 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-gray-900">Notificaciones</h2>
+            <button class="text-sm text-teal-600 font-medium hover:underline">Marcar todo como leído</button>
+        </div>
+
+        <div *ngIf="isLoading" class="p-8 text-center text-gray-500">
+            Cargando notificaciones...
+        </div>
+
+        <div *ngIf="!isLoading && notifications.length === 0" class="p-8 text-center text-gray-500">
+            No tienes notificaciones nuevas.
+        </div>
+
+        <div *ngIf="!isLoading && notifications.length > 0">
+            <div *ngFor="let note of notifications"
+                class="p-4 border-b border-gray-50 hover:bg-gray-50 transition-colors flex gap-4 items-start"
+                [class.bg-teal-50]="!note.read">
+
+                <!-- Avatar -->
+                <div
+                    class="w-12 h-12 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    {{ note.actorAvatar }}
+                </div>
+
+                <div class="flex-1">
+                    <p class="text-sm text-gray-900">
+                        <span class="font-bold">{{ note.actorName }}</span> {{ note.action }}
+                    </p>
+                    <p *ngIf="note.contentPreview" class="text-xs text-gray-500 mt-1 italic">
+                        "{{ note.contentPreview }}"
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">{{ note.time }}</p>
+                </div>
+
+                <div *ngIf="!note.read" class="w-3 h-3 bg-teal-500 rounded-full mt-2"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="min-h-screen flex bg-gray-100">
+    <!-- Left Side - Gradient & Info (Hidden on mobile, visible on lg screens) -->
+    <div
+        class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-yellow-400 via-teal-500 to-blue-600 flex-col justify-start pt-16 px-12 text-white relative overflow-hidden">
+        <div class="relative z-10 max-w-lg">
+            <div class="flex items-center gap-3 mb-6">
+                <!-- Logo UCAB -->
+                <img src="/assets/images/logo-ucab-sinfondo.png" alt="Logo UCAB" class="h-16 w-auto">
+                <h1 class="text-4xl font-bold">SoyUCAB</h1>
+            </div>
+
+            <h2 class="text-3xl font-semibold mb-6">Únete a nuestra comunidad</h2>
+            <p class="text-lg opacity-90 mb-10">Crea tu cuenta para acceder a todos los recursos y conectar con
+                estudiantes y profesores.</p>
+
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">Perfil Personalizado</h3>
+                        <p class="text-sm opacity-80">Gestiona tu identidad académica y profesional</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-white/20 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">Acceso Seguro</h3>
+                        <p class="text-sm opacity-80">Plataforma verificada para la comunidad UCAB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side - Register Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50 overflow-y-auto">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg border border-gray-100">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Crea tu cuenta</h2>
+                <p class="text-gray-500 text-sm mt-1">Completa tus datos para registrarte</p>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+
+                <!-- Fila 1: Usuario y Cédula -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="cuenta" class="block text-gray-600 text-xs font-semibold mb-1">Usuario</label>
+                        <input type="text" id="cuenta" name="cuenta" [(ngModel)]="data.cuenta" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="Ej: juan.perez">
+                    </div>
+                    <div>
+                        <label for="ci" class="block text-gray-600 text-xs font-semibold mb-1">Cédula (CI)</label>
+                        <input type="text" id="ci" name="ci" [(ngModel)]="data.ci" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="V-12345678">
+                    </div>
+                </div>
+
+                <!-- Fila 2: Primer y Segundo Nombre -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="primerNombre" class="block text-gray-600 text-xs font-semibold mb-1">Primer Nombre
+                            *</label>
+                        <input type="text" id="primerNombre" name="primerNombre" [(ngModel)]="data.primerNombre"
+                            required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="Juan">
+                    </div>
+                    <div>
+                        <label for="segundoNombre" class="block text-gray-600 text-xs font-semibold mb-1">Segundo
+                            Nombre</label>
+                        <input type="text" id="segundoNombre" name="segundoNombre" [(ngModel)]="data.segundoNombre"
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="Carlos">
+                    </div>
+                </div>
+
+                <!-- Fila 3: Primer y Segundo Apellido -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="primerApellido" class="block text-gray-600 text-xs font-semibold mb-1">Primer
+                            Apellido *</label>
+                        <input type="text" id="primerApellido" name="primerApellido" [(ngModel)]="data.primerApellido"
+                            required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="Pérez">
+                    </div>
+                    <div>
+                        <label for="segundoApellido" class="block text-gray-600 text-xs font-semibold mb-1">Segundo
+                            Apellido</label>
+                        <input type="text" id="segundoApellido" name="segundoApellido"
+                            [(ngModel)]="data.segundoApellido"
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            placeholder="López">
+                    </div>
+                </div>
+
+                <!-- Fila 4: Sexo y Lugar -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="sexo" class="block text-gray-600 text-xs font-semibold mb-1">Sexo *</label>
+                        <select id="sexo" name="sexo" [(ngModel)]="data.sexo" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option value="">Seleccionar...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="lugar" class="block text-gray-600 text-xs font-semibold mb-1">Lugar de Residencia
+                            *</label>
+                        <select id="lugar" name="lugarIso" [(ngModel)]="data.lugarIso" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option value="">Seleccionar...</option>
+                            <option *ngFor="let lugar of lugares" [value]="lugar.isoLugar">{{ lugar.nombre }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 5: Rol y Entidad Institucional -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="rol" class="block text-gray-600 text-xs font-semibold mb-1">Rol que desempeña
+                            *</label>
+                        <select id="rol" name="rol" [(ngModel)]="data.rol" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option value="">Seleccionar...</option>
+                            <option *ngFor="let rol of roles" [value]="rol.tipoRol">{{ rol.tipoRol }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="entidad" class="block text-gray-600 text-xs font-semibold mb-1">Facultad/Escuela
+                            *</label>
+                        <select id="entidad" name="entidadCodigo" [(ngModel)]="data.entidadCodigo" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option value="">Seleccionar...</option>
+                            <option *ngFor="let entidad of entidades" [value]="entidad.codInst">{{ entidad.nombre }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 6: Fechas -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="fechaInicio" class="block text-gray-600 text-xs font-semibold mb-1">Fecha de ingreso
+                            *</label>
+                        <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="data.fechaInicio" required
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="fechaFin" class="block text-gray-600 text-xs font-semibold mb-1">Fecha de
+                            egreso</label>
+                        <input type="date" id="fechaFin" name="fechaFin" [(ngModel)]="data.fechaFin"
+                            class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        <p class="text-xs text-gray-400 mt-1">Opcional (si ya egresó)</p>
+                    </div>
+                </div>
+
+                <!-- Campo: Contraseña -->
+                <div class="mb-5">
+                    <label for="password" class="block text-gray-600 text-xs font-semibold mb-1">Contraseña *</label>
+                    <input type="password" id="password" name="password" [(ngModel)]="data.password" required
+                        minlength="6"
+                        class="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        placeholder="********">
+                    <p class="text-xs text-gray-500 mt-1">Mínimo 6 caracteres</p>
+                </div>
+
+                <!-- Info: Correo automático -->
+                <div class="mb-5 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="text-xs text-blue-700">
+                        <strong>📧 Tu correo será:</strong> {{ data.cuenta || 'usuario' }}@ucab.edu.ve
+                    </p>
+                </div>
+
+                <div *ngIf="errorMessage"
+                    class="mb-4 bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm border border-red-100 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    {{ errorMessage }}
+                </div>
+
+                <button type="submit" [disabled]="!registerForm.form.valid"
+                    class="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 transition duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    Crear cuenta
+                </button>
+
+                <div class="mt-6 text-center text-sm text-gray-500">
+                    ¿Ya tienes una cuenta? <a href="/login" class="text-teal-600 hover:text-teal-800 font-bold">Inicia
+                        sesión aquí</a>
+                </div>
+
+                <div class="mt-6 border-t border-gray-100 pt-4 text-center text-xs text-gray-400">
+                    © 2026 SoyUCAB - Universidad Católica Andrés Bello
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

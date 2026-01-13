@@ -11,7 +11,9 @@ CONSTRAINT C_Tipo_Lugar CHECK (Tipo_L in ('País', 'Estado', 'Ciudad')));
 
 --Usuario
 Create table Usuario 
-(Cuenta varchar (15) PRIMARY KEY); 
+(Cuenta varchar (15) PRIMARY KEY,
+Password varchar (100) NOT NULL DEFAULT '12345',
+Email varchar (50)); 
 
 --Idioma 
 Create table Idioma 
@@ -93,6 +95,17 @@ Create Table Chat
 (Nombre_Chat VARCHAR (30) NOT NULL,
 Fecha_Creacion_Chat TIMESTAMP (6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (Nombre_Chat, Fecha_Creacion_Chat));
+
+--Mensaje
+Create Table Mensaje
+(id SERIAL PRIMARY KEY,
+ contenido TEXT,
+ fecha TIMESTAMP(6),
+ sender_id VARCHAR(15),
+ chat_nombre VARCHAR(30),
+ chat_timestamp TIMESTAMP(6),
+ CONSTRAINT FK_Mensaje_Sender FOREIGN KEY (sender_id) REFERENCES Usuario (Cuenta),
+ CONSTRAINT FK_Mensaje_Chat FOREIGN KEY (chat_nombre, chat_timestamp) REFERENCES Chat (Nombre_Chat, Fecha_Creacion_Chat));
 
 --Chat_Miembro
 Create table Chat_Miembro
@@ -352,7 +365,7 @@ BEGIN
         WHERE Usuario_Creador = p_usuario_creador
           AND FechaHora_Creacion = p_fecha_creacion;
         
-        RAISE NOTICE 'EXITO: Post actualizado correctamente por %.', p_usuario_editor;
+        RAISE NOTICE 'EXITO: Post actuaflizado correctamente por %.', p_usuario_editor;
     
     ELSIF p_operacion = 'DELETE' THEN
         
@@ -402,15 +415,17 @@ EXECUTE FUNCTION fn_insert_relacion_simetrica();
 
 --Stored Procedure Sugerir Candidatos 
 CREATE OR REPLACE PROCEDURE sugerir_candidatos(
-    p_carrera VARCHAR
+    p_carrera VARCHAR,
+    INOUT p_cursor REFCURSOR DEFAULT 'rn_candidatos'
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
+    OPEN p_cursor FOR
     SELECT 
         p.CI,
         p.Persona_Usuario AS usuario,
-        p.Primer_Nombre || ' ' || p.Primer_Apellido AS nombre,
+        concat_ws(' ', p.Primer_Nombre, p.Segundo_Nombre, p.Primer_Apellido, p.Segundo_Apellido) AS nombre,
         COUNT(h.Habilidad) AS coincidencias_hab
     FROM Persona p
     JOIN Nexo n ON n.CI_Nexo = p.CI
@@ -511,28 +526,28 @@ $$;
 
 --Usuario 
 
-INSERT INTO Usuario (Cuenta) VALUES ('qdmancha.22');
-INSERT INTO Usuario (Cuenta) VALUES ('smpanza.22');
-INSERT INTO Usuario (Cuenta) VALUES ('chbenengeli.19');
-INSERT INTO Usuario (Cuenta) VALUES ('dtoboso.22');
-INSERT INTO Usuario (Cuenta) VALUES ('mcervantes.02');
-INSERT INTO Usuario (Cuenta) VALUES ('jgmaestro.95');
-INSERT INTO Usuario (Cuenta) VALUES ('cjmarlow.20');
-INSERT INTO Usuario (Cuenta) VALUES ('Lfguichard.15');
-INSERT INTO Usuario (Cuenta) VALUES ('aagromeko.17');
-INSERT INTO Usuario (Cuenta) VALUES ('yazhivago.14');
-INSERT INTO Usuario (Cuenta) VALUES ('telawrence.04');
-INSERT INTO Usuario (Cuenta) VALUES ('mercantil.20');
-INSERT INTO Usuario (Cuenta) VALUES ('empolar.20');
-INSERT INTO Usuario (Cuenta) VALUES ('ccfemsa.20');
-INSERT INTO Usuario (Cuenta) VALUES ('banesco.20');
-INSERT INTO Usuario (Cuenta) VALUES ('mercer.20');
-INSERT INTO Usuario (Cuenta) VALUES ('embfan.20');
-INSERT INTO Usuario (Cuenta) VALUES ('embpol.20');
-INSERT INTO Usuario (Cuenta) VALUES ('embcor.20');
-INSERT INTO Usuario (Cuenta) VALUES ('duncan.20');
-INSERT INTO Usuario (Cuenta) VALUES ('pepsico.20');
-INSERT INTO Usuario (Cuenta) VALUES ('bestiaSQL.25');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('qdmancha.22', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('smpanza.22', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('chbenengeli.19', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('dtoboso.22', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('mcervantes.02', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('jgmaestro.95', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('cjmarlow.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('Lfguichard.15', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('aagromeko.17', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('yazhivago.14', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('telawrence.04', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('mercantil.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('empolar.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('ccfemsa.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('banesco.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('mercer.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('embfan.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('embpol.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('embcor.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('duncan.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('pepsico.20', '12345');
+INSERT INTO Usuario (Cuenta, Password) VALUES ('bestiaSQL.25', '12345');
 
 
 --Lugar
