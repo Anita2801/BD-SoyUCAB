@@ -40,7 +40,10 @@ export class EventService {
     }
 
     deleteEvento(nombre: string, fecha: string, organizador: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}?nombre=${nombre}&fecha=${fecha}&organizador=${organizador}`);
+        const encodedNombre = encodeURIComponent(nombre);
+        const encodedFecha = encodeURIComponent(fecha);
+        const encodedOrganizador = encodeURIComponent(organizador);
+        return this.http.delete<void>(`${this.apiUrl}?nombre=${encodedNombre}&fecha=${encodedFecha}&organizador=${encodedOrganizador}`);
     }
 
     toggleAttendance(event: EventoDTO, userId: string): Observable<boolean> {

@@ -12,11 +12,15 @@ import java.time.LocalDate;
 
 @Repository
 public interface AsistenciaEventoRepository extends JpaRepository<AsistenciaEvento, AsistenciaEventoId> {
-    
+
     @Modifying
     @Transactional
     @Query("DELETE FROM AsistenciaEvento a WHERE a.id.nombreEvento = :nombre AND a.id.fechaEvento = :fecha AND a.id.usuarioOrganizador = :organizador")
     void deleteByEventoId(@Param("nombre") String nombre,
-                          @Param("fecha") LocalDate fecha,
-                          @Param("organizador") String organizador);
+            @Param("fecha") LocalDate fecha,
+            @Param("organizador") String organizador);
+
+    @Modifying
+    @Query("DELETE FROM AsistenciaEvento a WHERE a.asistente.cuenta = :cuenta")
+    void deleteByAsistenteCuenta(@Param("cuenta") String cuenta);
 }

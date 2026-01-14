@@ -38,7 +38,9 @@ export class ContentService {
     }
 
     deletePost(usuario: string, fecha: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}?usuario=${usuario}&fecha=${fecha}`);
+        const encodedUsuario = encodeURIComponent(usuario);
+        const encodedFecha = encodeURIComponent(fecha);
+        return this.http.delete<void>(`${this.apiUrl}?usuario=${encodedUsuario}&fecha=${encodedFecha}`);
     }
 
     toggleReaction(userId: string, contentOwner: string, contentDate: string, reactionType: string): Observable<any> {

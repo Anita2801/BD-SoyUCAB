@@ -179,15 +179,19 @@ export class DashboardComponent implements OnInit {
                     id: Math.random(),
                     author: {
                         name: this.currentUser.name,
+                        account: account, // CRITICAL FIX: Add account so menu logic works (isOwner check)
                         role: this.currentUser.role,
                         initials: this.currentUser.initials,
                         color: 'bg-teal-600'
                     },
+                    usuarioCreador: account, // Also needed for delete logic
+                    fechaHoraCreacion: newItem.fechaHoraCreacion, // Real date from backend
                     time: 'Ahora mismo',
                     content: this.newPostContent,
                     stats: { likes: 0, dislikes: 0, comments: 0, shares: 0 },
                     liked: false,
-                    disliked: false
+                    disliked: false,
+                    showMenu: false
                 });
                 this.newPostContent = '';
                 this.cdr.detectChanges();
@@ -337,23 +341,46 @@ export class DashboardComponent implements OnInit {
         this.openEditPostModal(post);
     }
 
-    deletePost(post: any) {
-        post.showMenu = false;
-        if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
-            const originalPosts = [...this.posts];
-            this.posts = this.posts.filter(p => !(p.fechaHoraCreacion === post.fechaHoraCreacion && p.usuarioCreador === post.usuarioCreador)); // Optimistic update
+    // Delete Post Modal
+    showDeletePostModal = false;
+    deletingPost: any = null;
 
-            this.contentService.deletePost(post.usuarioCreador || this.currentUser.account, post.fechaHoraCreacion).subscribe({
-                next: () => {
-                    // Success
-                },
-                error: (err) => {
-                    console.error('Error deleting post', err);
-                    alert('Error al eliminar la publicación');
-                    this.posts = originalPosts; // Revert
-                }
-            });
-        }
+    openDeletePostModal(post: any) {
+        post.showMenu = false;
+        this.deletingPost = post;
+        this.showDeletePostModal = true;
+        this.cdr.detectChanges();
+    }
+
+    closeDeletePostModal() {
+        this.showDeletePostModal = false;
+        this.deletingPost = null;
+    }
+
+    confirmDeletePost() {
+        if (!this.deletingPost) return;
+
+        const post = this.deletingPost;
+        const originalPosts = [...this.posts];
+
+        // Optimistic remove
+        this.posts = this.posts.filter(p => p !== post);
+        this.closeDeletePostModal(); // Close modal immediately
+
+        this.contentService.deletePost(post.author.account || this.currentUser.account || post.usuarioCreador, post.fechaHoraCreacion).subscribe({
+            next: () => {
+                // Success
+            },
+            error: (err) => {
+                console.error('Error deleting post', err);
+                alert('Error al eliminar la publicación');
+                this.posts = originalPosts; // Revert
+            }
+        });
+    }
+
+    deletePost(post: any) {
+        this.openDeletePostModal(post);
     }
 }
 

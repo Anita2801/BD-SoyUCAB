@@ -33,7 +33,7 @@ export interface ProfileDTO {
         views: number;
     };
     languages: { name: string; level: number; }[];
-    experience: { role: string; company: string; period: string; description: string; }[];
+    experience: { role: string; company: string; period: string; startDate: string; endDate: string; description: string; }[];
     contacts: { name: string; role: string; initials: string; color: string; }[];
     sexo?: string;
 }
@@ -65,6 +65,10 @@ export class UserService {
         return this.http.get<PersonaDTO[]>(`${this.apiUrl}/suggestions/${cuenta}`);
     }
 
+    searchPersonas(query: string): Observable<PersonaDTO[]> {
+        return this.http.get<PersonaDTO[]>(`${this.apiUrl}/search?query=${query}`);
+    }
+
     getProfile(cuenta: string): Observable<ProfileDTO> {
         return this.http.get<ProfileDTO>(`${this.apiUrl}/profile/${cuenta}`);
     }
@@ -84,6 +88,27 @@ export class UserService {
     getUserPosts(cuenta: string): Observable<any[]> {
         return this.http.get<any[]>(`${environment.apiUrl}/contenido/usuario/${cuenta}`);
     }
+
+    followUser(solicitante: string, receptor: string): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/social/relacion`, {
+            usuarioSolicitante: solicitante,
+            usuarioReceptor: receptor,
+            tipoRelacion: 'Seguimiento',
+            estado: 'Aceptada', // Assuming following is immediate
+            fechaRelacion: new Date().toISOString().split('T')[0]
+        });
+    }
+
+    getFollowing(cuenta: string): Observable<SeRelacionaDTO[]> {
+        return this.http.get<SeRelacionaDTO[]>(`${environment.apiUrl}/social/${cuenta}/following`);
+    }
+}
+
+export interface SeRelacionaDTO {
+    usuarioReceptor: string;
+    usuarioSolicitante: string;
+    estado: string;
+    tipoRelacion: string;
 }
 
 export interface ProfileUpdateDTO {
@@ -95,4 +120,15 @@ export interface ProfileUpdateDTO {
     phone?: string;
     location?: string;
     sexo?: string;
+    experience?: {
+        role: string;
+        company: string;
+        startDate: string;
+        endDate?: string;
+        description: string;
+    }[];
+    languages?: {
+        name: string;
+        level: number;
+    }[];
 }

@@ -349,25 +349,28 @@ public class ChatService {
 
         // For relationships where userId is the RECEPTOR (someone sent them a request)
         for (SeRelaciona rel : asReceptor) {
-            // For Amistad: if accepted, both can add each other
+            // For Amistad: only if accepted, both can add each other
             if ("Aceptada".equalsIgnoreCase(rel.getEstado()) && "Amistad".equalsIgnoreCase(rel.getTipoRelacion())) {
                 addableUsers.add(rel.getSolicitante());
             }
             // For Seguimiento where userId is receptor: the solicitante follows userId
-            // But userId cannot add them based on this - skip
+            // But userId cannot add them based on this relationship - skip
         }
 
-        // For relationships where userId is the SOLICITANTE (they sent the request)
+        // For relationships where userId is the SOLICITANTE (they initiated)
         for (SeRelaciona rel : asSolicitante) {
-            // For Amistad: if accepted, both can add each other
+            // For Amistad: only if accepted
             if ("Aceptada".equalsIgnoreCase(rel.getEstado()) && "Amistad".equalsIgnoreCase(rel.getTipoRelacion())) {
                 addableUsers.add(rel.getReceptor());
             }
-            // For Seguimiento: userId follows receptor, so userId CAN add receptor
-            if ("Aceptada".equalsIgnoreCase(rel.getEstado()) && "Seguimiento".equalsIgnoreCase(rel.getTipoRelacion())) {
+            // For Seguimiento: userId follows receptor - no acceptance needed for follows!
+            // If the record exists, userId is following receptor and can add them
+            if ("Seguimiento".equalsIgnoreCase(rel.getTipoRelacion())) {
                 addableUsers.add(rel.getReceptor());
             }
         }
+
+        System.out.println("DEBUG getFriends for " + userId + ": found " + addableUsers.size() + " addable users");
 
         return addableUsers.stream().distinct().map(u -> {
             String fullName = resolveFullName(u);

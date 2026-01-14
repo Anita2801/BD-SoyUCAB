@@ -55,7 +55,8 @@ export class GroupService {
     }
 
     deleteGrupo(nombre: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${nombre}`);
+        const encodedNombre = encodeURIComponent(nombre);
+        return this.http.delete<void>(`${this.apiUrl}/${encodedNombre}`);
     }
 
     joinGrupo(data: any): Observable<any> {

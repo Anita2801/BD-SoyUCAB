@@ -39,6 +39,8 @@ public class ProfileDTO {
         private String role;
         private String company;
         private String period;
+        private String startDate; // ISO
+        private String endDate; // ISO
         private String description;
     }
 

@@ -10,7 +10,6 @@
                     <span class="text-xl font-bold text-gray-800 tracking-tight">SoyUCAB</span>
                 </div>
 
-                <!-- Search (Desktop) -->
                 <div class="hidden md:block w-96">
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -19,9 +18,36 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input
+                        <input [(ngModel)]="searchQuery" (input)="onSearch()" (blur)="clearSearch()"
                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm transition duration-150 ease-in-out"
-                            placeholder="Buscar personas, profesiones, publicaciones..." type="search">
+                            placeholder="Buscar personas..." type="search">
+
+                        <!-- Dropdown Results -->
+                        <div *ngIf="searchResults.length > 0"
+                            class="absolute mt-2 w-full bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                            <ul class="py-1">
+                                <li *ngFor="let result of searchResults" (click)="openProfile(result.usuarioCuenta)"
+                                    class="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-3 border-b border-gray-50 last:border-0">
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                                        {{ result.primerNombre[0] }}{{ result.primerApellido[0] }}
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900">{{ result.primerNombre }} {{
+                                            result.segundoNombre }} {{ result.primerApellido }}</p>
+                                        <p class="text-xs text-gray-500">@{{ result.usuarioCuenta }}</p>
+                                    </div>
+                                    <button (click)="followUser(result.usuarioCuenta, $event)"
+                                        [class.bg-gray-100]="followedUsers.has(result.usuarioCuenta)"
+                                        [class.text-gray-500]="followedUsers.has(result.usuarioCuenta)"
+                                        [class.bg-teal-50]="!followedUsers.has(result.usuarioCuenta)"
+                                        [class.text-teal-700]="!followedUsers.has(result.usuarioCuenta)"
+                                        class="text-xs px-2 py-1 rounded hover:opacity-80 font-medium z-50 transition-colors">
+                                        {{ followedUsers.has(result.usuarioCuenta) ? 'Seguido' : 'Seguir' }}
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

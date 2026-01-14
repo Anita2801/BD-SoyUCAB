@@ -272,23 +272,51 @@ export class EventsComponent implements OnInit {
         });
     }
 
-    deleteEvent(event: any) {
-        if (!confirm('¿Estás seguro de eliminar este evento?')) return;
+    // Models for Delete
+    showDeleteModal = false;
+    deletingEvent: any = null;
 
-        // We need original fields. Assuming mapToView preserves them or we can infer.
-        // Wait, mapToView used name as ID. We need date and organizer.
-        // We should enhance mapToView to include these raw fields.
+    openDeleteModal(event: any) {
+        console.log('DEBUG: openDeleteModal for', event.title);
+        this.deletingEvent = event;
+        this.showDeleteModal = true;
+    }
+
+    closeDeleteModal() {
+        this.showDeleteModal = false;
+        this.deletingEvent = null;
+    }
+
+    confirmDelete() {
+        if (!this.deletingEvent) return;
+        const event = this.deletingEvent;
+
+        console.log('DEBUG: confirmDelete executing for', event.title);
+
         if (!event.rawDate || !event.rawOrganizer) {
-            console.error('Missing raw data for delete');
+            console.error('DEBUG confirmDelete - Missing raw data:', { rawDate: event.rawDate, rawOrganizer: event.rawOrganizer });
+            alert('Error: Datos del evento incompletos para eliminar');
+            this.closeDeleteModal();
             return;
         }
 
         this.eventService.deleteEvento(event.title, event.rawDate, event.rawOrganizer).subscribe({
             next: () => {
+                console.log('DEBUG confirmDelete - SUCCESS');
                 this.loadEvents();
+                this.closeDeleteModal();
             },
-            error: (err) => alert('Error al eliminar evento')
+            error: (err) => {
+                console.error('DEBUG confirmDelete - ERROR:', err);
+                alert('Error al eliminar evento: ' + (err.message || err.error?.message || 'Error desconocido'));
+                this.closeDeleteModal(); // Close anyway? Or keep open? Close is safer UI.
+            }
         });
+    }
+
+    // Deprecated direct delete, now using openDeleteModal
+    deleteEvent(event: any) {
+        this.openDeleteModal(event);
     }
 
     toggleAttendance(event: any) {

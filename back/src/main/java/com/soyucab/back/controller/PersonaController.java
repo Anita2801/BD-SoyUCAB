@@ -62,6 +62,13 @@ public class PersonaController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/search")
+    public List<PersonaDTO> search(@RequestParam String query) {
+        return personaService.search(query).stream()
+                .map(personaMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/profile/{cuenta}")
     public ResponseEntity<com.soyucab.back.dto.ProfileDTO> getProfile(@PathVariable String cuenta) {
         try {
@@ -73,7 +80,7 @@ public class PersonaController {
 
     @PutMapping("/profile/{cuenta}")
     public ResponseEntity<com.soyucab.back.dto.ProfileDTO> updateProfile(
-            @PathVariable String cuenta, 
+            @PathVariable String cuenta,
             @RequestBody com.soyucab.back.dto.ProfileUpdateDTO updateDTO) {
         try {
             return ResponseEntity.ok(personaService.updateProfile(cuenta, updateDTO));

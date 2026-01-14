@@ -60,7 +60,9 @@ export class ChatService {
     }
 
     deleteChat(chatName: string, chatDate: string, userId: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${chatName}/${chatDate}?userId=${userId}`);
+        const encodedName = encodeURIComponent(chatName);
+        const encodedDate = encodeURIComponent(chatDate);
+        return this.http.delete<void>(`${this.apiUrl}/${encodedName}/${encodedDate}?userId=${userId}`);
     }
 
     leaveChat(chatName: string, chatDate: string, userId: string): Observable<void> {

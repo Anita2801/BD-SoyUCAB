@@ -248,15 +248,26 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         });
     }
 
-    deleteChat() {
+    // Delete Chat Modal
+    showDeleteChatModal = false;
+
+    openDeleteChatModal() {
+        if (!this.selectedChat) return;
+        this.showOptionsMenu = false;
+        this.showDeleteChatModal = true;
+        this.triggerChangeDetection();
+    }
+
+    closeDeleteChatModal() {
+        this.showDeleteChatModal = false;
+    }
+
+    confirmDeleteChat() {
         if (!this.selectedChat) return;
 
-        this.showOptionsMenu = false; // Close menu first
-        this.triggerChangeDetection();
-
-        if (!confirm('¿Estás seguro de que deseas eliminar este chat?')) return;
-
         const chatToDelete = this.selectedChat;
+        this.closeDeleteChatModal(); // Close modal immediately
+
         this.chatService.deleteChat(chatToDelete.nombre, chatToDelete.fechaCreacion, this.currentUser).subscribe({
             next: () => {
                 this.zone.run(() => {
@@ -275,6 +286,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
                 });
             }
         });
+    }
+
+    deleteChat() {
+        this.openDeleteChatModal();
     }
 
     leaveChat() {

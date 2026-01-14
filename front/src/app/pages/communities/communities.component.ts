@@ -256,19 +256,44 @@ export class CommunitiesComponent implements OnInit {
         });
     }
 
-    deleteGroup(groupName: string) {
-        if (!confirm(`¿Estás seguro de que quieres eliminar el grupo "${groupName}"? Esta acción no se puede deshacer.`)) return;
+    // Delete Modal
+    showDeleteModal: boolean = false;
+    deletingGroup: any = null;
+
+    openDeleteModal(groupName: string) {
+        console.log('DEBUG: openDeleteModal for', groupName);
+        this.deletingGroup = { name: groupName }; // Create minimal object
+        this.showDeleteModal = true;
+    }
+
+    closeDeleteModal() {
+        this.showDeleteModal = false;
+        this.deletingGroup = null;
+    }
+
+    confirmDelete() {
+        if (!this.deletingGroup) return;
+        const groupName = this.deletingGroup.name;
+
+        console.log('DEBUG: confirmDelete executing for', groupName);
 
         this.groupService.deleteGrupo(groupName).subscribe({
             next: () => {
+                console.log('DEBUG confirmDelete - SUCCESS');
                 this.loadData();
+                this.closeDeleteModal();
                 alert(`Grupo "${groupName}" eliminado.`);
             },
             error: (err) => {
-                console.error('Error deleting group:', err);
-                alert('Error al eliminar el grupo.');
+                console.error('DEBUG confirmDelete - ERROR:', err);
+                alert('Error al eliminar el grupo: ' + (err.message || err.error?.message || 'Error desconocido'));
+                this.closeDeleteModal();
             }
         });
+    }
+
+    deleteGroup(groupName: string) {
+        this.openDeleteModal(groupName);
     }
 
     // Checking roles

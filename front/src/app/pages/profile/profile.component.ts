@@ -108,9 +108,53 @@ export class ProfileComponent implements OnInit {
             segundoApellido: this.user.segundoApellido || '',
             bio: this.user.bio || '',
             location: this.user.location || '',
-            sexo: this.user.sexo || ''
+            sexo: this.user.sexo || '',
+            experience: this.user.experience ? this.user.experience.map(e => ({
+                role: e.role,
+                company: e.company,
+                startDate: e.startDate || '',
+                endDate: e.endDate || '',
+                description: e.description
+            })) : [],
+            languages: this.user.languages ? this.user.languages.map(l => ({
+                name: l.name,
+                level: l.level
+            })) : []
         };
         this.showEditModal = true;
+    }
+
+    // Dynamic Experience Fields
+    addExperience() {
+        if (!this.editForm.experience) this.editForm.experience = [];
+        this.editForm.experience.push({
+            role: '',
+            company: '',
+            startDate: '',
+            endDate: '',
+            description: ''
+        });
+    }
+
+    removeExperience(index: number) {
+        if (this.editForm.experience) {
+            this.editForm.experience.splice(index, 1);
+        }
+    }
+
+    // Dynamic Language Fields
+    addLanguage() {
+        if (!this.editForm.languages) this.editForm.languages = [];
+        this.editForm.languages.push({
+            name: '',
+            level: 50
+        });
+    }
+
+    removeLanguage(index: number) {
+        if (this.editForm.languages) {
+            this.editForm.languages.splice(index, 1);
+        }
     }
 
     closeEditModal() {
@@ -217,24 +261,46 @@ export class ProfileComponent implements OnInit {
         this.openEditPostModal(post);
     }
 
-    deletePost(post: any) {
-        post.showMenu = false;
-        if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
-            const originalPosts = [...this.posts];
-            // Filter by date since user is same
-            this.posts = this.posts.filter(p => p.fechaHoraCreacion !== post.fechaHoraCreacion);
+    // Delete Post Modal
+    showDeletePostModal = false;
+    deletingPost: any = null;
 
-            this.contentService.deletePost(this.currentAccount!, post.fechaHoraCreacion).subscribe({
-                next: () => {
-                    // Success
-                },
-                error: (err) => {
-                    console.error('Error deleting post', err);
-                    alert('Error al eliminar la publicación');
-                    this.posts = originalPosts; // Revert
-                }
-            });
-        }
+    openDeletePostModal(post: any) {
+        post.showMenu = false;
+        this.deletingPost = post;
+        this.showDeletePostModal = true;
+        this.cdr.detectChanges();
+    }
+
+    closeDeletePostModal() {
+        this.showDeletePostModal = false;
+        this.deletingPost = null;
+    }
+
+    confirmDeletePost() {
+        if (!this.deletingPost) return;
+
+        const post = this.deletingPost;
+        const originalPosts = [...this.posts];
+
+        // Optimistic remove
+        this.posts = this.posts.filter(p => p.fechaHoraCreacion !== post.fechaHoraCreacion);
+        this.closeDeletePostModal();
+
+        this.contentService.deletePost(this.currentAccount!, post.fechaHoraCreacion).subscribe({
+            next: () => {
+                // Success
+            },
+            error: (err) => {
+                console.error('Error deleting post', err);
+                alert('Error al eliminar la publicación');
+                this.posts = originalPosts; // Revert
+            }
+        });
+    }
+
+    deletePost(post: any) {
+        this.openDeletePostModal(post);
     }
 
     logout() {

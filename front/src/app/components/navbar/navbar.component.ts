@@ -1,14 +1,15 @@
 import { Component, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth';
-import { UserService, ProfileDTO } from '../../services/user.service';
+import { UserService, ProfileDTO, PersonaDTO } from '../../services/user.service';
 import { ChatService, ChatDTO } from '../../services/chat.service';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, FormsModule],
     templateUrl: './navbar.component.html',
     styles: []
 })
@@ -18,6 +19,12 @@ export class NavbarComponent {
     showNotifications = false;
     showMessages = false;
     showUserMenu = false;
+
+    // Search
+    searchQuery: string = '';
+    searchResults: PersonaDTO[] = [];
+    isSearching: boolean = false;
+    followedUsers: Set<string> = new Set(); // Track followed users locally
 
     notifications: any[] = [];
 
@@ -95,6 +102,16 @@ export class NavbarComponent {
     }
 
     loadData(userId: string) {
+        // Load Following List
+        this.userService.getFollowing(userId).subscribe({
+            next: (follows) => {
+                this.followedUsers.clear();
+                follows.forEach(f => this.followedUsers.add(f.usuarioReceptor));
+                this.triggerChangeDetection();
+            },
+            error: (err) => console.error('Error loading following list:', err)
+        });
+
         // Load Chats
         this.chatService.getUserChats(userId).subscribe({
             next: (chats) => {
@@ -160,5 +177,54 @@ export class NavbarComponent {
     logout() {
         this.authService.logout();
         this.router.navigate(['/login']);
+    }
+
+    onSearch() {
+        if (!this.searchQuery || this.searchQuery.length < 2) {
+            this.searchResults = [];
+            return;
+        }
+
+        this.isSearching = true;
+        this.userService.searchPersonas(this.searchQuery).subscribe({
+            next: (results) => {
+                this.searchResults = results;
+                this.isSearching = false;
+                this.triggerChangeDetection();
+            },
+            error: (err) => {
+                console.error('Search error:', err);
+                this.isSearching = false;
+            }
+        });
+    }
+
+    clearSearch() {
+        setTimeout(() => {
+            this.searchQuery = '';
+            this.searchResults = [];
+            this.triggerChangeDetection();
+        }, 200); // Small delay to allow click event to register
+    }
+
+    followUser(receptor: string, event: Event) {
+        event.stopPropagation();
+        const currentUser = this.authService.getAccountFromToken();
+        if (!currentUser || this.followedUsers.has(receptor)) return;
+
+        this.userService.followUser(currentUser, receptor).subscribe({
+            next: () => {
+                this.followedUsers.add(receptor);
+                this.triggerChangeDetection();
+                // Optional: Show discrete toast instead of alert? Keeping alert for now as requested or removing it for smoother UI.
+                // User asked for "Seguido" text, not alert.
+            },
+            error: (err) => console.error('Error following user:', err)
+        });
+    }
+
+    openProfile(cuenta: string) {
+        this.router.navigate(['/profile', cuenta]);
+        this.clearSearch();
     }
 }

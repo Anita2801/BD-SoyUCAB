@@ -232,7 +232,7 @@
                                             </svg>
                                             Editar
                                         </button>
-                                        <button (click)="deletePost(post)"
+                                        <button (click)="$event.stopPropagation(); deletePost(post)"
                                             class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 border-t border-gray-100">
                                             <svg class="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
@@ -341,89 +341,194 @@
                                 <textarea [(ngModel)]="editForm.bio" rows="3"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2 border"></textarea>
                             </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
-                        <button (click)="saveProfile()" [disabled]="isSaving"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 sm:ml-3 sm:w-auto sm:text-sm">
-                            {{ isSaving ? 'Guardando...' : 'Guardar' }}
-                        </button>
-                        <button (click)="closeEditModal()"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Delete Confirmation Modal -->
-        <div *ngIf="showDeleteConfirm" class="fixed inset-0 z-50 overflow-y-auto">
-            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" (click)="closeDeleteConfirm()">
-                </div>
-                <div
-                    class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center">
-                                <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
+                            <!-- Experience Section -->
+                            <div class="mt-6 border-t pt-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="block text-sm font-medium text-gray-700">Experiencia</label>
+                                    <button (click)="addExperience()"
+                                        class="text-xs text-teal-600 font-bold border border-teal-600 px-2 py-1 rounded hover:bg-teal-50">+
+                                        Agregar</button>
+                                </div>
+                                <div *ngFor="let exp of editForm.experience; let i = index"
+                                    class="mb-4 p-3 bg-gray-50 rounded border border-gray-200 relative">
+                                    <button (click)="removeExperience(i)"
+                                        class="absolute top-2 right-2 text-red-500 hover:text-red-700 font-bold">&times;</button>
+                                    <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <input [(ngModel)]="exp.company" placeholder="Empresa"
+                                            class="text-sm border-gray-300 rounded p-1 w-full">
+                                        <input [(ngModel)]="exp.role" placeholder="Cargo"
+                                            class="text-sm border-gray-300 rounded p-1 w-full">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <div class="flex flex-col">
+                                            <label class="text-xs text-gray-500">Inicio</label>
+                                            <input type="date" [(ngModel)]="exp.startDate"
+                                                class="text-xs border-gray-300 rounded p-1 w-full">
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label class="text-xs text-gray-500">Fin</label>
+                                            <input type="date" [(ngModel)]="exp.endDate"
+                                                class="text-xs border-gray-300 rounded p-1 w-full">
+                                        </div>
+                                    </div>
+                                    <textarea [(ngModel)]="exp.description" placeholder="Descripción" rows="2"
+                                        class="text-sm border-gray-300 rounded p-1 w-full"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Languages Section -->
+                            <div class="mt-6 border-t pt-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="block text-sm font-medium text-gray-700">Idiomas</label>
+                                    <button (click)="addLanguage()"
+                                        class="text-xs text-teal-600 font-bold border border-teal-600 px-2 py-1 rounded hover:bg-teal-50">+
+                                        Agregar</button>
+                                </div>
+                                <div *ngFor="let lang of editForm.languages; let i = index"
+                                    class="mb-2 flex items-center gap-2">
+                                    <input [(ngModel)]="lang.name" placeholder="Idioma (Ej: Inglés)"
+                                        class="text-sm border-gray-300 rounded p-1 flex-1">
+                                    <input type="range" [(ngModel)]="lang.level" min="0" max="100" class="w-24">
+                                    <span class="text-xs text-gray-500 w-8">{{lang.level}}%</span>
+                                    <button (click)="removeLanguage(i)"
+                                        class="text-red-500 hover:text-red-700 font-bold px-2">&times;</button>
+                                </div>
                             </div>
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900">Eliminar Perfil</h3>
-                                <p class="text-sm text-gray-500">¿Estás seguro de que deseas eliminar tu cuenta? Esta
-                                    acción no
-                                    se puede deshacer.</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
-                        <button (click)="confirmDelete()"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
-                            Eliminar
-                        </button>
-                        <button (click)="closeDeleteConfirm()"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Edit Post Modal -->
-        <div *ngIf="showEditPostModal" class="fixed inset-0 z-50 overflow-y-auto"
-            aria-labelledby="modal-title-edit-post" role="dialog" aria-modal="true">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
-                    (click)="closeEditPostModal()"></div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div
-                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title-edit-post">
-                            Editar Publicación
-                        </h3>
-                        <div>
-                            <textarea [(ngModel)]="editPostContent" rows="5"
-                                class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 resize-none"
-                                placeholder="¿Qué estás pensando?"></textarea>
+                        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
+                            <button (click)="saveProfile()" [disabled]="isSaving"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 sm:ml-3 sm:w-auto sm:text-sm">
+                                {{ isSaving ? 'Guardando...' : 'Guardar' }}
+                            </button>
+                            <button (click)="closeEditModal()"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Cancelar
+                            </button>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="button" (click)="saveEditedPost()"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Guardar Cambios
-                        </button>
-                        <button type="button" (click)="closeEditPostModal()"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancelar
-                        </button>
+                </div>
+            </div>
+
+            <!-- Delete Confirmation Modal -->
+            <div *ngIf="showDeleteConfirm" class="fixed inset-0 z-50 overflow-y-auto">
+                <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                        (click)="closeDeleteConfirm()">
+                    </div>
+                    <div
+                        class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900">Eliminar Perfil</h3>
+                                    <p class="text-sm text-gray-500">¿Estás seguro de que deseas eliminar tu cuenta?
+                                        Esta
+                                        acción no
+                                        se puede deshacer.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
+                            <button (click)="confirmDelete()"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
+                                Eliminar
+                            </button>
+                            <button (click)="closeDeleteConfirm()"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Edit Post Modal -->
+            <div *ngIf="showEditPostModal" class="fixed inset-0 z-50 overflow-y-auto"
+                aria-labelledby="modal-title-edit-post" role="dialog" aria-modal="true">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                        (click)="closeEditPostModal()"></div>
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title-edit-post">
+                                Editar Publicación
+                            </h3>
+                            <div>
+                                <textarea [(ngModel)]="editPostContent" rows="5"
+                                    class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 resize-none"
+                                    placeholder="¿Qué estás pensando?"></textarea>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="button" (click)="saveEditedPost()"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                Guardar Cambios
+                            </button>
+                            <button type="button" (click)="closeEditPostModal()"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Post Confirmation Modal -->
+            <div *ngIf="showDeletePostModal" class="fixed inset-0 z-50 overflow-y-auto"
+                aria-labelledby="modal-title-delete-post" role="dialog" aria-modal="true">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                        (click)="closeDeletePostModal()"></div>
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                    <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900"
+                                        id="modal-title-delete-post">
+                                        Eliminar Publicación</h3>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500">
+                                            ¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se
+                                            puede
+                                            deshacer.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="button" (click)="confirmDeletePost()"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                                Eliminar
+                            </button>
+                            <button type="button" (click)="closeDeletePostModal()"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>

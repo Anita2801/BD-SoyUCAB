@@ -90,6 +90,21 @@ public class NotificacionesService {
             notifications.add(dto);
         }
 
+        // 2. Get General Notifications (like follows)
+        List<Notificaciones> generalNotifs = notificacionesRepository.findByUsuarioDestino_Cuenta(account);
+        for (Notificaciones n : generalNotifs) {
+            com.soyucab.back.controller.dto.NotificationDTO dto = new com.soyucab.back.controller.dto.NotificationDTO();
+            dto.setId("notif-" + n.getId());
+            dto.setActorName("Sistema"); // We don't have actor info stored in this simple table
+            dto.setActorAvatar("SU"); // System User
+            dto.setAction(n.getMensaje());
+            dto.setContentPreview("");
+            dto.setTime(n.getFechaCreacion() != null ? n.getFechaCreacion().toLocalDate().toString() : "Reciente");
+            dto.setType(n.getTipoAlerta());
+            dto.setRead(false);
+            notifications.add(dto);
+        }
+
         return notifications;
     }
 
